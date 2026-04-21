@@ -4,10 +4,11 @@
 
 Ce dossier rassemble l'intégralité du cours, réorganisé en **18 chapitres chronologiques** qui vont de la théorie pure jusqu'aux laboratoires pratiques.
 
-> **Étudiants — par où commencer ?** (les pratiques se font dans cet ordre)
-> 1. **Pratique 1** — Labo 1 ELK (chap. 11) → [chapitre 11](./11-labo1-mise-en-place-elk.md) + [`ch11-labo1-elk/`](./assets-cours2/solutions/ch11-labo1-elk/)
-> 2. **Pratique 2** — CRUD Kibana (chap. 13, énoncé `Kibana - Pratique 1.docx`) → [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md)
-> 3. **Pratique 3** — Search/DSL (chap. 17, énoncé `Kibana - Pratique 2.docx`) → [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md)
+> **Étudiants — les pratiques sont numérotées dans l'ordre d'exécution** (Pratique 1 → Pratique 10, plus deux laboratoires Labo 1 et Labo 2).
+>
+> Les **deux pratiques avec guide étudiant pas-à-pas** (= énoncés `.docx` du prof) :
+> - **Pratique 7** (chap. 13, CRUD Kibana, énoncé `Kibana - Pratique 1.docx`) → [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md)
+> - **Labo 2** (chap. 17, Search/DSL, énoncé `Kibana - Pratique 2.docx`) → [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md)
 >
 > **Matériel source** (datasets, énoncés .docx du prof) : voir le sous-dossier [`assets-cours2/`](./assets-cours2/).
 > **Solutions runnables des exercices** (chapitres 8 à 17) + **setup A à Z** : voir [`assets-cours2/solutions/`](./assets-cours2/solutions/).
@@ -15,36 +16,47 @@ Ce dossier rassemble l'intégralité du cours, réorganisé en **18 chapitres ch
 
 ## Table des matières
 
-> **Trois pratiques notées dans l'ordre :** **Pratique 1** = chap. 11 (Labo 1 ELK) → **Pratique 2** = chap. 13 (CRUD Kibana, énoncé `Kibana - Pratique 1.docx`) → **Pratique 3** = chap. 17 (Labo 2, énoncé `Kibana - Pratique 2.docx`).
+> Les chapitres marqués **Pratique N** sont à faire **dans l'ordre numérique** (1 → 10). Les chapitres **Labo 1** et **Labo 2** sont les deux livrables principaux.
 
-| #   | Titre                                                                                       | Type         | Pratique        |
-| --- | ------------------------------------------------------------------------------------------- | ------------ | --------------- |
-| 01  | [Introduction à Elasticsearch & ELK Stack](./01-introduction-elasticsearch-elk-stack.md)    | Théorie      | —               |
-| 02  | [SQL vs Documents (Elasticsearch)](./02-theorie-sql-vs-documents.md)                        | Théorie      | —               |
-| 03  | [Concepts clés : cluster, shards, mapping, types](./03-concepts-cles-elasticsearch.md)      | Théorie      | —               |
-| 04  | [Architecture pipeline ELK + Neo4j](./04-architecture-pipeline-elk-neo4j.md)                | Architecture | —               |
-| 05  | [Architecture pipeline ELK + Machine Learning](./05-architecture-pipeline-elk-ml.md)        | Architecture | —               |
-| 06  | [Installation de Neo4j (Linux + Docker)](./06-installation-neo4j.md)                        | Pratique     | —               |
-| 07  | [Premiers pas en Cypher](./07-premiers-pas-cypher.md)                                       | Pratique     | —               |
-| 08  | [Cas pratique Cypher : cours, professeurs, programme IA](./08-cas-pratique-cypher-ia.md)    | Pratique     | —               |
-| 09  | [Nettoyage et reset d'une base Neo4j](./09-nettoyage-neo4j.md)                              | Pratique     | —               |
-| 10  | [Installation d'Elasticsearch + Kibana](./10-installation-elasticsearch-kibana.md)          | Pratique     | (préparation P1)|
-| 11  | [**Labo 1** — Mise en place complète ELK avec persistance](./11-labo1-mise-en-place-elk.md) | Laboratoire  | **Pratique 1**  |
-| 12  | [Commandes de base d'Elasticsearch (curl)](./12-commandes-base-elasticsearch.md)            | Pratique     | (préparation P2)|
-| 13  | [CRUD pédagogique avec Kibana Dev Tools (`forum`, `liste_cours`)](./13-crud-pedagogique-kibana.md) | Pratique | **Pratique 2** — [guide étudiant](./assets-cours2/GUIDE-PRATIQUE-1.md) |
-| 14  | [Import d'un dataset volumineux (Bulk API)](./14-import-bulk-dataset.md)                    | Pratique     | (préparation P3)|
-| 15  | [Requêtes Elasticsearch — niveau intermédiaire](./15-requetes-elasticsearch-intermediaire.md) | Pratique   | (préparation P3)|
-| 16  | [Requêtes avancées : KQL, ES\|QL, Query DSL](./16-requetes-avancees-kql-esql-dsl.md)        | Pratique     | (préparation P3)|
-| 17  | [**Labo 2** — Rapport DSL sur l'index `news`](./17-labo2-rapport-dsl-news.md)               | Laboratoire  | **Pratique 3** — [guide étudiant](./assets-cours2/GUIDE-PRATIQUE-2.md) |
-| 18  | [Annexe — Architectures avancées (Kafka, ML, Computer Vision)](./18-annexe-architectures-avancees.md) | Annexe | —               |
+| #   | Titre                                                                                       | Type         | Pratique         |
+| --- | ------------------------------------------------------------------------------------------- | ------------ | ---------------- |
+| 01  | [Introduction à Elasticsearch & ELK Stack](./01-introduction-elasticsearch-elk-stack.md)    | Théorie      | —                |
+| 02  | [SQL vs Documents (Elasticsearch)](./02-theorie-sql-vs-documents.md)                        | Théorie      | —                |
+| 03  | [Concepts clés : cluster, shards, mapping, types](./03-concepts-cles-elasticsearch.md)      | Théorie      | —                |
+| 04  | [Architecture pipeline ELK + Neo4j](./04-architecture-pipeline-elk-neo4j.md)                | Architecture | —                |
+| 05  | [Architecture pipeline ELK + Machine Learning](./05-architecture-pipeline-elk-ml.md)        | Architecture | —                |
+| 06  | [Installation de Neo4j (Linux + Docker)](./06-installation-neo4j.md)                        | Pratique     | **Pratique 1**   |
+| 07  | [Premiers pas en Cypher](./07-premiers-pas-cypher.md)                                       | Pratique     | **Pratique 2**   |
+| 08  | [Cas pratique Cypher : cours, professeurs, programme IA](./08-cas-pratique-cypher-ia.md)    | Pratique     | **Pratique 3**   |
+| 09  | [Nettoyage et reset d'une base Neo4j](./09-nettoyage-neo4j.md)                              | Pratique     | **Pratique 4**   |
+| 10  | [Installation d'Elasticsearch + Kibana](./10-installation-elasticsearch-kibana.md)          | Pratique     | **Pratique 5**   |
+| 11  | [**Labo 1** — Mise en place complète ELK avec persistance](./11-labo1-mise-en-place-elk.md) | Laboratoire  | **Labo 1**       |
+| 12  | [Commandes de base d'Elasticsearch (curl)](./12-commandes-base-elasticsearch.md)            | Pratique     | **Pratique 6**   |
+| 13  | [CRUD pédagogique avec Kibana Dev Tools (`forum`, `liste_cours`)](./13-crud-pedagogique-kibana.md) | Pratique | **Pratique 7** — [guide étudiant](./assets-cours2/GUIDE-PRATIQUE-1.md) |
+| 14  | [Import d'un dataset volumineux (Bulk API)](./14-import-bulk-dataset.md)                    | Pratique     | **Pratique 8**   |
+| 15  | [Requêtes Elasticsearch — niveau intermédiaire](./15-requetes-elasticsearch-intermediaire.md) | Pratique   | **Pratique 9**   |
+| 16  | [Requêtes avancées : KQL, ES\|QL, Query DSL](./16-requetes-avancees-kql-esql-dsl.md)        | Pratique     | **Pratique 10**  |
+| 17  | [**Labo 2** — Rapport DSL sur l'index `news`](./17-labo2-rapport-dsl-news.md)               | Laboratoire  | **Labo 2** — [guide étudiant](./assets-cours2/GUIDE-PRATIQUE-2.md) |
+| 18  | [Annexe — Architectures avancées (Kafka, ML, Computer Vision)](./18-annexe-architectures-avancees.md) | Annexe | —                |
 
-### Récapitulatif des pratiques notées
+### Récapitulatif des pratiques et laboratoires
 
-| Ordre        | Chapitre | Énoncé officiel du prof          | Guide étudiant                                                              | Projet runnable                                                       |
-| ------------ | :------: | -------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| **Pratique 1** | 11     | (interne au cours)                | [chapitre 11](./11-labo1-mise-en-place-elk.md)                              | [`ch11-labo1-elk/`](./assets-cours2/solutions/ch11-labo1-elk/)        |
-| **Pratique 2** | 13     | `Kibana - Pratique 1.docx`        | [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md)                | [`ch13-crud-kibana/`](./assets-cours2/solutions/ch13-crud-kibana/)    |
-| **Pratique 3** | 17     | `Kibana - Pratique 2.docx`        | [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md)                | [`ch17-labo2/`](./assets-cours2/solutions/ch17-labo2/)                |
+| Ordre           | Chapitre | Sujet                                         | Énoncé officiel du prof          | Guide / projet runnable                                              |
+| --------------- | :------: | --------------------------------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| **Pratique 1**  | 06       | Installation de Neo4j (Linux + Docker)        | (interne au cours)                | [chapitre 06](./06-installation-neo4j.md)                            |
+| **Pratique 2**  | 07       | Premiers pas en Cypher                        | (interne au cours)                | [chapitre 07](./07-premiers-pas-cypher.md)                           |
+| **Pratique 3**  | 08       | Cas pratique Cypher (cours, profs, IA)        | (interne au cours)                | [`ch08-cypher-ia/`](./assets-cours2/solutions/ch08-cypher-ia/)       |
+| **Pratique 4**  | 09       | Nettoyage / reset Neo4j                       | (interne au cours)                | [chapitre 09](./09-nettoyage-neo4j.md)                               |
+| **Pratique 5**  | 10       | Installation d'Elasticsearch + Kibana         | (interne au cours)                | [chapitre 10](./10-installation-elasticsearch-kibana.md)             |
+| **Labo 1**      | 11       | Mise en place complète ELK avec persistance   | (interne au cours)                | [`ch11-labo1-elk/`](./assets-cours2/solutions/ch11-labo1-elk/)       |
+| **Pratique 6**  | 12       | Commandes de base ES (`curl`)                 | (interne au cours)                | [`ch12-commandes-base/`](./assets-cours2/solutions/ch12-commandes-base/) |
+| **Pratique 7**  | 13       | CRUD pédagogique Kibana                       | `Kibana - Pratique 1.docx`        | [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md) + [`ch13-crud-kibana/`](./assets-cours2/solutions/ch13-crud-kibana/) |
+| **Pratique 8**  | 14       | Bulk import (200 853 docs)                    | (interne au cours)                | [`ch14-bulk-import/`](./assets-cours2/solutions/ch14-bulk-import/)   |
+| **Pratique 9**  | 15       | Requêtes DSL intermédiaires                   | (interne au cours)                | [`ch15-requetes/`](./assets-cours2/solutions/ch15-requetes/)         |
+| **Pratique 10** | 16       | KQL vs ES\|QL vs DSL                          | (interne au cours)                | [`ch16-kql-esql-dsl/`](./assets-cours2/solutions/ch16-kql-esql-dsl/) |
+| **Labo 2**      | 17       | Rapport DSL complet sur l'index `news`        | `Kibana - Pratique 2.docx`        | [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md) + [`ch17-labo2/`](./assets-cours2/solutions/ch17-labo2/) |
+
+> **Attention à la nomenclature.** Les fichiers `.docx` du prof s'appellent `Kibana - Pratique 1.docx` et `Kibana - Pratique 2.docx`. Dans **notre numérotation interne**, ils correspondent respectivement à **Pratique 7** (chap. 13) et **Labo 2** (chap. 17).
 
 ---
 
