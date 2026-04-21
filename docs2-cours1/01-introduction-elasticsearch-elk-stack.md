@@ -12,6 +12,7 @@
 - [4. À quoi ça sert concrètement ?](#4-à-quoi-ça-sert-concrètement-)
 - [5. Vocabulaire de base à connaître](#5-vocabulaire-de-base-à-connaître)
 - [6. Récapitulatif visuel](#6-récapitulatif-visuel)
+- [7. Glossaire — tous les mots-clés Elasticsearch](#7-glossaire--tous-les-mots-clés-elasticsearch)
 
 ---
 
@@ -350,10 +351,10 @@ C'est pour ça qu'on parle parfois de **Solr** ou **OpenSearch** : ce sont d'aut
 
 ```mermaid
 flowchart LR
-    Sources[Logs / API / CSV / Bases] --> L[Logstash<br/>ou Beats<br/>ou script Python]
-    L --> E[(Elasticsearch<br/>stockage + recherche)]
-    E --> K[Kibana<br/>UI + dashboards]
-    K --> User[Utilisateur]
+    Sources["Logs / API / CSV / Bases"] --> L["Logstash<br/>ou Beats<br/>ou script Python"]
+    L --> E[("Elasticsearch<br/>stockage + recherche")]
+    E --> K["Kibana<br/>UI + dashboards"]
+    K --> User["Utilisateur"]
 ```
 
 | Composant         | Rôle                                                                     |
@@ -362,6 +363,110 @@ flowchart LR
 | **Logstash**      | Pipeline d'ingestion (parse, transforme, enrichit, envoie à ES).         |
 | **Elasticsearch** | Stocke + indexe + permet la recherche.                                   |
 | **Kibana**        | Interface web : explorer, visualiser, créer des dashboards.              |
+
+---
+
+#### Beats vs Logstash : qui transforme, qui se contente de collecter ?
+
+Le schéma ci-dessus regroupe **Beats**, **Logstash** et **scripts Python** dans une même case d'« ingestion ». En réalité, ces trois outils n'ont **pas du tout** le même rôle : certains se contentent de **collecter** la donnée brute, d'autres la **transforment** avant de l'envoyer à Elasticsearch.
+
+```mermaid
+flowchart LR
+    LOGS["Fichiers de logs<br/>nginx / app / system"] --> FB["Filebeat<br/>Beats - sans transformation"]
+    METR["Metriques<br/>CPU / RAM / disque"] --> MB["Metricbeat<br/>Beats - sans transformation"]
+    FB --> ES1[("Elasticsearch")]
+    MB --> ES1
+
+    LOGS2["Logs heterogenes<br/>JSON, CSV, syslog,<br/>multilignes, IP brutes"] --> LS["Logstash<br/>parse + transforme + enrichit<br/>(grok, geoip, mutate)"]
+    LS --> ES2[("Elasticsearch")]
+
+    DB["Base SQL<br/>MongoDB, Neo4j, etc."] --> PY["Script Python<br/>(logique metier custom)"]
+    PY --> ES3[("Elasticsearch")]
+```
+
+| Outil               | Transforme la donnee ? | Quand le choisir ?                                                                            |
+| ------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| **Beats** (Filebeat, Metricbeat, Packetbeat…) | **Non** (ou tres peu)  | Vous avez juste besoin de **lire un fichier ou une metrique** et de l'envoyer telle quelle. Tres leger (en Go), tourne sur la machine source. |
+| **Logstash**        | **Oui**, fortement     | La donnee brute est **mal formee** : il faut la decouper (`grok`), enrichir (`geoip`), nettoyer (`mutate`), router (`if`). Pipeline puissant mais plus lourd (JVM). |
+| **Script Python / ETL custom** | **Oui**, sur mesure | La logique est **specifique au metier** : agreger plusieurs sources, appeler une API tierce, calculer un score, joindre Neo4j et ES. Maximum de flexibilite. |
+
+<details>
+<summary><b>Exemple concret : un meme log nginx, trois chemins differents</b></summary>
+
+Prenons une ligne de log nginx :
+
+```
+192.168.1.42 - - [21/Apr/2026:10:15:33 +0000] "GET /api/users/42 HTTP/1.1" 200 1234
+```
+
+**Chemin 1 — Beats seul (Filebeat) :**
+
+Filebeat lit le fichier et envoie le document **tel quel** dans Elasticsearch. Le champ `message` contient toute la ligne brute. Pratique pour archiver, pas pratique pour analyser (vous ne pouvez pas filtrer sur le code HTTP, l'IP, etc., car ce ne sont pas des champs distincts).
+
+```json
+{ "message": "192.168.1.42 - - [21/Apr/2026:10:15:33 +0000] \"GET /api/users/42 HTTP/1.1\" 200 1234" }
+```
+
+**Chemin 2 — Logstash :**
+
+Logstash applique un filtre `grok` qui **decoupe** la ligne en champs structures, puis `geoip` qui **enrichit** avec le pays de l'IP :
+
+```json
+{
+  "client_ip": "192.168.1.42",
+  "geoip": { "country": "Canada", "city": "Montreal" },
+  "method": "GET",
+  "path": "/api/users/42",
+  "status": 200,
+  "bytes": 1234,
+  "@timestamp": "2026-04-21T10:15:33Z"
+}
+```
+
+Maintenant on peut faire des dashboards : « top 10 des pays », « taux d'erreur 5xx par heure », etc.
+
+**Chemin 3 — Script Python :**
+
+Le script fait la meme chose que Logstash, mais en plus il **appelle une autre base** (Neo4j) pour recuperer le **role** de l'utilisateur 42 et l'ajoute au document :
+
+```json
+{
+  "client_ip": "192.168.1.42",
+  "user_id": 42,
+  "user_role": "admin",
+  "user_team": "data",
+  "method": "GET",
+  ...
+}
+```
+
+C'est ce qu'on fait dans le projet Spotify pour **synchroniser Neo4j vers Elasticsearch**.
+
+</details>
+
+<details>
+<summary><b>Regle simple pour choisir</b></summary>
+
+| Question                                                          | Reponse → Outil       |
+| ----------------------------------------------------------------- | --------------------- |
+| « Je veux juste envoyer un fichier de log a ES, sans le toucher » | **Filebeat (Beats)**  |
+| « Le log est mal forme, il faut le parser et l'enrichir »         | **Logstash**          |
+| « Je dois croiser plusieurs sources ou appliquer une regle metier » | **Script Python / ETL custom** |
+| « C'est de la metrique systeme (CPU, RAM, reseau) »               | **Metricbeat (Beats)** |
+| « Je veux ingerer un CSV une fois pour toutes »                   | **Bulk API + script** |
+
+Et bien sur on **combine** : Filebeat collecte → envoie a Logstash qui transforme → Logstash ecrit dans Elasticsearch.
+
+```mermaid
+flowchart LR
+    LOG["Fichier nginx"] --> FB["Filebeat<br/>(transport leger)"]
+    FB --> LS["Logstash<br/>(parse + enrichit)"]
+    LS --> ES[("Elasticsearch")]
+```
+
+C'est l'architecture **classique de production** : chaque outil fait ce qu'il sait faire de mieux.
+
+</details>
 
 <details>
 <summary><b>Faut-il TOUS les composants ELK ? (explication détaillée)</b></summary>
@@ -610,9 +715,241 @@ mindmap
       Analytique
 ```
 
-<p align="right"><a href="#top">↑ Retour en haut</a></p>
-
-
 ---
 
-*Copyright © Haythem R - Tous droits reserves.*
+## 7. Glossaire — tous les mots-clés Elasticsearch
+
+> Référence rapide de **tous les mots-clés** que vous croiserez dans le cours et dans la documentation officielle. Triés par catégorie. Ouvrez les sections `<details>` pour les explications longues.
+
+### 7.1 Endpoints et préfixes spéciaux (les `_` underscore)
+
+Tout ce qui commence par `_` dans une URL Elasticsearch est un **endpoint réservé** (et **non** un nom d'index).
+
+| Mot-clé             | Type        | À quoi ça sert                                                                                                                |
+| ------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `_doc`              | Type doc    | **Type implicite** d'un document. `POST /produits/_doc` = « ajoute un document dans l'index `produits` ». Avant ES 7, on avait des « types » personnalisés (deprecated). Aujourd'hui : toujours `_doc`. |
+| `_id`               | Métadonnée  | Identifiant unique du document dans l'index (ex. `"_id": "abc123"`). Si vous ne le donnez pas, ES en génère un.                |
+| `_index`            | Métadonnée  | Nom de l'index dans lequel le document est stocké.                                                                            |
+| `_source`           | Métadonnée  | Le **JSON original** du document tel que vous l'avez envoyé. C'est ce qui est renvoyé par défaut dans les résultats.          |
+| `_score`            | Métadonnée  | Score de pertinence calculé par BM25 lors d'une recherche. Plus c'est haut, plus c'est pertinent.                              |
+| `_search`           | Endpoint    | `GET /produits/_search { ... }` → exécuter une requête Query DSL.                                                              |
+| `_count`            | Endpoint    | `GET /produits/_count` → juste compter les documents (sans les renvoyer).                                                      |
+| `_create`           | Endpoint    | `PUT /produits/_create/42 { ... }` → créer un document **uniquement s'il n'existe pas** (sinon erreur 409).                    |
+| `_update`           | Endpoint    | `POST /produits/_update/42 { "doc": { ... } }` → **mise à jour partielle** (merge JSON).                                       |
+| `_update_by_query`  | Endpoint    | Mettre à jour **plusieurs documents** d'un coup via une requête.                                                              |
+| `_delete_by_query`  | Endpoint    | Supprimer **plusieurs documents** d'un coup via une requête.                                                                  |
+| `_bulk`             | Endpoint    | `POST /_bulk` → envoyer **des milliers d'opérations** (index/create/update/delete) en une seule requête HTTP. Indispensable pour l'import massif. |
+| `_mget`             | Endpoint    | « multi-get » : récupérer plusieurs documents par leurs IDs en une seule requête.                                              |
+| `_msearch`          | Endpoint    | « multi-search » : exécuter plusieurs requêtes en une seule fois.                                                             |
+| `_mapping`          | Endpoint    | `GET /produits/_mapping` → voir le schéma (types des champs) de l'index.                                                      |
+| `_settings`         | Endpoint    | `GET /produits/_settings` → voir/modifier les réglages d'un index (shards, réplicas, analyzers).                              |
+| `_aliases`          | Endpoint    | Donner un **alias** à un index (ex. `logs-current` pointe vers `logs-2026.04`). Permet de pivoter sans changer le code client. |
+| `_refresh`          | Endpoint    | Forcer ES à rendre **immédiatement visibles** les documents qui viennent d'être indexés (sinon attente ~1 s).                  |
+| `_flush`            | Endpoint    | Forcer Lucene à écrire les segments sur disque (rare en pratique).                                                            |
+| `_forcemerge`       | Endpoint    | Fusionner les petits segments Lucene en gros (optimisation à froid).                                                          |
+| `_reindex`          | Endpoint    | Copier tous les documents d'un index vers un autre (ex. après changement de mapping).                                          |
+| `_cat`              | Endpoint    | `GET /_cat/indices?v` → vues **lisibles** (texte tabulaire) du cluster, des indices, des nœuds, des shards…                   |
+| `_cluster`          | Endpoint    | `GET /_cluster/health` → état général du cluster (vert / jaune / rouge).                                                       |
+| `_nodes`            | Endpoint    | `GET /_nodes` → infos sur tous les nœuds du cluster.                                                                          |
+| `_tasks`            | Endpoint    | Voir et annuler les **tâches longues** en cours (reindex, update_by_query, etc.).                                              |
+| `_snapshot`         | Endpoint    | Sauvegardes / restaurations.                                                                                                 |
+| `_template`         | Endpoint    | **Templates d'index** : appliquer automatiquement des mappings/settings à tout index dont le nom matche un pattern.            |
+| `_ingest`           | Endpoint    | Gérer les **ingest pipelines** (transformations à l'indexation : `set`, `rename`, `geoip`, `inference`, …).                    |
+| `_security`         | Endpoint    | Utilisateurs, rôles, API keys (X-Pack).                                                                                       |
+| `_ilm`              | Endpoint    | **Index Lifecycle Management** : politique de rotation chaud → tiède → froid → suppression.                                    |
+| `_cache/clear`      | Endpoint    | Vider les caches (utile en debug).                                                                                            |
+| `_explain`          | Endpoint    | `GET /produits/_explain/42` → expliquer **pourquoi** un document obtient tel score pour telle requête.                         |
+| `_validate/query`   | Endpoint    | Vérifier qu'une requête DSL est syntaxiquement correcte sans l'exécuter.                                                      |
+| `_analyze`          | Endpoint    | Tester un **analyzer** : « voici un texte, donne-moi les tokens produits ».                                                   |
+
+<details>
+<summary><b>Pourquoi <code>_doc</code> existe encore alors qu'il n'y a plus de "types" ?</b></summary>
+
+Avant Elasticsearch 7, un index pouvait contenir **plusieurs types** de documents (ex. `produits`, `clients` dans le même index `boutique`). Cette idée a été abandonnée car elle créait des conflits de mapping et de la confusion.
+
+Depuis ES 7+, **un index = un seul type**, et ce type s'appelle conventionnellement `_doc`. C'est pour ça que toutes les URLs ressemblent à :
+
+```
+POST /mon_index/_doc          → créer un doc (ID auto)
+PUT  /mon_index/_doc/42       → créer/remplacer le doc 42
+GET  /mon_index/_doc/42       → lire le doc 42
+DELETE /mon_index/_doc/42     → supprimer le doc 42
+```
+
+`_doc` n'est **pas** un nom magique : c'est juste le **placeholder du type unique**. Vous ne pouvez pas le changer.
+
+</details>
+
+### 7.2 Concepts d'architecture
+
+| Mot-clé             | Définition                                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Cluster**         | Ensemble de nœuds Elasticsearch qui partagent le même `cluster.name` et travaillent ensemble.                   |
+| **Node** (nœud)     | Un process Elasticsearch (1 JVM) sur une machine. Plusieurs rôles possibles : master, data, ingest, coordinating. |
+| **Index**           | « Table » logique d'Elasticsearch. Contient des documents JSON.                                                  |
+| **Shard**           | Morceau d'un index. Un index est découpé en N shards primaires distribués sur les nœuds.                         |
+| **Replica**         | Copie d'un shard primaire sur **un autre nœud**. Sert à la haute dispo et accélère la lecture.                   |
+| **Document**        | Unité de base : un objet JSON stocké dans un index, identifié par `_id`.                                          |
+| **Field** (champ)   | Une clé d'un document JSON. Chaque champ a un **type** (text, keyword, long, date, geo_point, dense_vector…).    |
+| **Mapping**         | Schéma de l'index : la liste des champs et leur type. Peut être explicite ou inféré (« dynamic mapping »).      |
+| **Segment**         | Fichier Lucene immuable contenant une portion d'un shard. Les recherches scannent tous les segments.              |
+| **Lucene**          | Bibliothèque Java de recherche full-text utilisée par Elasticsearch sous le capot.                                |
+| **Inverted index**  | Structure « mot → liste des documents qui le contiennent ». Cœur de la rapidité d'Elasticsearch.                  |
+
+### 7.3 Types de champs (mapping)
+
+| Type                   | Quand l'utiliser                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| `text`                 | Texte libre **analysé** (tokenisé). Bon pour `match`, recherche full-text. Pas trié, pas agrégé.       |
+| `keyword`              | Texte **non analysé** (stocké tel quel). Pour `term`, tri, agrégations (ex. `category.keyword`).        |
+| `long`, `integer`, `short`, `byte` | Entiers.                                                                                  |
+| `double`, `float`, `half_float`, `scaled_float` | Décimaux.                                                                  |
+| `boolean`              | `true` / `false`.                                                                                      |
+| `date`                 | Date/heure (formats ISO ou epoch_millis).                                                              |
+| `binary`               | Données encodées en base64.                                                                            |
+| `object`               | Sous-objet JSON imbriqué (aplati par défaut).                                                          |
+| `nested`               | Sous-objet imbriqué qui **conserve son indépendance** (utile pour des tableaux d'objets).              |
+| `geo_point`            | Coordonnées lat/lon (cartes Kibana).                                                                   |
+| `geo_shape`            | Polygones, lignes (cartes complexes).                                                                  |
+| `ip`                   | Adresse IPv4/IPv6 (filtrage par CIDR).                                                                 |
+| `dense_vector`         | Vecteur dense pour recherche **kNN** (embeddings, IA, similarité sémantique).                          |
+| `completion`           | Auto-complétion ultra-rapide (suggester).                                                              |
+
+### 7.4 Query DSL (recherche)
+
+| Mot-clé             | Catégorie    | Effet                                                                                              |
+| ------------------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| `query`             | Racine       | Conteneur d'une requête de recherche.                                                              |
+| `match`             | Full-text    | Cherche un mot/phrase dans un champ `text` (analysé). Tolère les variations.                       |
+| `match_phrase`      | Full-text    | Cherche une **phrase exacte** (mots dans l'ordre, contigus).                                        |
+| `match_all`         | Full-text    | Renvoie tous les documents (utile pour exporter / paginer tout).                                    |
+| `multi_match`       | Full-text    | `match` sur **plusieurs champs** à la fois (avec `boost` par champ possible).                       |
+| `term`              | Term-level   | Match **exact** sur un champ `keyword` ou un nombre. Ne tokenise pas.                               |
+| `terms`             | Term-level   | Match exact sur **une liste de valeurs** (ex. `category IN ['POLITICS', 'TECH']`).                  |
+| `range`             | Term-level   | Filtre `>=`, `<=`, `gt`, `lt` sur nombre, date, IP.                                                |
+| `exists`            | Term-level   | Document où un champ est présent (et non null).                                                    |
+| `prefix`            | Term-level   | Préfixe (ex. `chat*`).                                                                             |
+| `wildcard`          | Term-level   | Joker `*` et `?` (lent, à éviter en prod).                                                         |
+| `regexp`            | Term-level   | Expression régulière.                                                                              |
+| `fuzzy`             | Term-level   | Tolérance aux fautes de frappe (distance de Levenshtein).                                          |
+| `bool`              | Compound     | Combine plusieurs clauses : `must`, `should`, `must_not`, `filter`.                                |
+| `must`              | Bool         | **Doit matcher** (compte dans le score).                                                           |
+| `should`            | Bool         | **Devrait matcher** (boost le score). `minimum_should_match` contrôle combien doivent matcher.     |
+| `must_not`          | Bool         | **Ne doit pas matcher** (exclusion).                                                               |
+| `filter`            | Bool         | Doit matcher mais **ne compte pas dans le score** (et est cacheable → rapide).                     |
+| `function_score`    | Compound     | Modifier le score avec des fonctions (ex. décroissance temporelle, multiplicateur custom).         |
+| `boost`             | Param        | Multiplie le poids d'une clause ou d'un champ.                                                     |
+| `minimum_should_match` | Param     | Combien de clauses `should` doivent matcher (ex. `"75%"`).                                          |
+| `operator`          | Param `match`| `or` (défaut, large) ou `and` (strict).                                                            |
+| `fuzziness`         | Param `match`| `AUTO`, `1`, `2` : tolérance aux fautes.                                                           |
+| `from` / `size`     | Pagination   | Décalage et nombre de résultats (limité à 10 000 → utiliser `search_after` au-delà).                |
+| `search_after`      | Pagination   | Pagination profonde stable (basée sur la dernière ligne reçue).                                    |
+| `scroll`            | Pagination   | Curseur pour parcourir des **millions** de documents (export). Deprecated au profit de `pit`.      |
+| `pit`               | Pagination   | « Point in time » : snapshot pour `search_after`.                                                  |
+| `sort`              | Tri          | Trier par un ou plusieurs champs (`asc` / `desc`).                                                 |
+| `_source`           | Filtre       | Limiter quels champs sont renvoyés (économise de la bande passante).                               |
+| `highlight`         | Affichage    | Surligner les mots qui ont matché (`<em>...</em>` autour des hits).                                |
+| `track_total_hits`  | Param        | Forcer le calcul exact du nombre total de hits (sinon ES s'arrête à 10 000).                       |
+
+### 7.5 Agrégations
+
+| Mot-clé             | Type d'agg   | Effet                                                                                              |
+| ------------------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| `aggs` / `aggregations` | Racine   | Conteneur d'agrégations (équivalent SQL `GROUP BY`).                                               |
+| `terms`             | Bucket       | Regrouper par valeur d'un champ (top N).                                                           |
+| `date_histogram`    | Bucket       | Regrouper par tranche de temps (`day`, `hour`, `month`).                                           |
+| `histogram`         | Bucket       | Regrouper par tranche numérique (ex. tous les 100).                                                |
+| `range`             | Bucket       | Regrouper par intervalles personnalisés.                                                           |
+| `filters`           | Bucket       | Plusieurs buckets définis chacun par une requête.                                                  |
+| `nested`            | Bucket       | Agréger sur des champs `nested`.                                                                   |
+| `avg`, `sum`, `min`, `max` | Metric | Statistiques classiques.                                                                            |
+| `cardinality`       | Metric       | Compte de valeurs **distinctes** (approximatif, HyperLogLog).                                       |
+| `stats`             | Metric       | `avg + sum + min + max + count` en une seule passe.                                                |
+| `extended_stats`    | Metric       | + écart-type, variance.                                                                            |
+| `percentiles`       | Metric       | Médiane, p95, p99 (latence par exemple).                                                          |
+| `top_hits`          | Sub-agg      | Récupérer les **N documents représentatifs** de chaque bucket.                                     |
+| `significant_terms` | Bucket       | Termes **anormalement fréquents** dans un sous-ensemble (utile NLP).                              |
+| `composite`         | Bucket       | Agrégation paginée (équivalent `GROUP BY` infini).                                                 |
+
+### 7.6 Analyse de texte (analyzers)
+
+| Mot-clé             | Effet                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| `analyzer`          | Pipeline complet `char_filter → tokenizer → token_filter` appliqué à un champ `text`.              |
+| `char_filter`       | Pré-traitement (HTML strip, mapping de caractères).                                                |
+| `tokenizer`         | Découpage en tokens (`standard`, `whitespace`, `keyword`, `ngram`…).                                |
+| `token_filter`      | Transforme les tokens (`lowercase`, `stop` mots vides, `stemmer` racines, `synonym`).               |
+| `standard analyzer` | Analyzer par défaut, multilingue de base.                                                          |
+| `keyword analyzer`  | Ne tokenise pas (laisse le texte tel quel, en un seul token).                                      |
+| `french analyzer`   | Pré-construit pour le français (stopwords + stemming `light_french`).                              |
+| `normalizer`        | Comme un analyzer mais pour les champs `keyword` (lowercase / asciifolding).                       |
+
+### 7.7 Langages de requête disponibles dans Kibana
+
+| Mot-clé             | Quand l'utiliser                                                                                   |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| **Query DSL**       | JSON envoyé à `_search`. Le langage **natif** d'Elasticsearch. Le plus puissant.                   |
+| **KQL** (Kibana Query Language) | Barre de recherche dans **Discover** / dashboards. Syntaxe simple : `status:200 AND user:alice`. |
+| **Lucene query syntax** | Ancien langage de la barre Discover. Toujours dispo, mais KQL est recommandé.                    |
+| **ES\|QL**          | Langage tabulaire **type SQL piped** (`FROM ... | WHERE ... | STATS ...`). Idéal pour rapports.    |
+| **SQL**             | API SQL d'Elasticsearch (`POST /_sql?format=txt`). Limitée mais pratique.                          |
+| **EQL**             | Event Query Language (sécurité, séquences d'événements).                                           |
+
+### 7.8 Concurrence et versioning
+
+| Mot-clé             | Effet                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| `_version`          | Numéro de version interne du document (incrémenté à chaque update).                                |
+| `_seq_no`           | Numéro de séquence du shard (utilisé pour le **CAS optimistique**).                                |
+| `_primary_term`     | Numéro de génération du shard primaire.                                                           |
+| `if_seq_no` / `if_primary_term` | Conditions sur un update : « ne mets à jour que si la version n'a pas changé ».        |
+| `version_type`      | `internal` (défaut) ou `external` (vous gérez vous-même la version).                               |
+| `op_type`           | `index` (remplace) ou `create` (échoue si existe).                                                 |
+| `routing`           | Forcer un document vers un shard particulier (utile pour co-localiser des données liées).         |
+
+### 7.9 Composants de la stack
+
+| Mot-clé             | Rôle                                                                                               |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| **Elasticsearch**   | Le moteur (stocke + indexe + cherche).                                                            |
+| **Kibana**          | UI web : Discover, Dashboards, Dev Tools, Stack Management, ML.                                    |
+| **Logstash**        | Pipeline de transformation lourd (JVM). Filtres `grok`, `geoip`, `mutate`.                         |
+| **Beats**           | Famille d'agents légers (Go) : **Filebeat** (logs), **Metricbeat** (métriques), **Packetbeat** (réseau), **Auditbeat** (sécurité), **Heartbeat** (uptime), **Winlogbeat** (Windows). |
+| **Fleet** + **Elastic Agent** | Successeur unifié de Beats, géré centralement.                                          |
+| **APM Server**      | Application Performance Monitoring (traces, latences).                                             |
+| **Eland**           | Bibliothèque Python pour pousser des modèles ML (PyTorch, sklearn) dans ES.                        |
+| **X-Pack**          | Ensemble de fonctionnalités payantes/gratuites (sécurité, alerting, ML, monitoring).               |
+
+### 7.10 Codes de retour HTTP fréquents
+
+| Code  | Signification dans Elasticsearch                                                                          |
+| ----- | --------------------------------------------------------------------------------------------------------- |
+| `200` | OK (lecture / recherche).                                                                                 |
+| `201` | Created (document créé).                                                                                  |
+| `400` | Bad request (requête mal formée, mapping refusé).                                                         |
+| `404` | Not found (index ou doc inexistant).                                                                      |
+| `409` | Conflict (collision de version, ou `_create` sur ID existant).                                             |
+| `429` | Too many requests (file de bulk pleine → ralentir).                                                        |
+| `503` | Service unavailable (cluster pas prêt, shards non assignés).                                               |
+
+<details>
+<summary><b>Aide-mémoire ultra-condensé : les 10 commandes à retenir absolument</b></summary>
+
+```http
+GET  /_cat/indices?v                          # Voir tous les indices
+GET  /_cluster/health                          # Etat du cluster
+PUT  /produits                                 # Creer un index vide
+PUT  /produits/_mapping { ... }                # Definir le schema
+POST /produits/_doc { "name": "casque" }       # Indexer un document (ID auto)
+PUT  /produits/_doc/42 { "name": "casque" }    # Indexer/remplacer le doc 42
+GET  /produits/_doc/42                          # Lire le doc 42
+POST /produits/_update/42 { "doc": {...} }     # Mise a jour partielle
+GET  /produits/_search { "query": {...} }      # Rechercher
+DELETE /produits                                # Supprimer l'index
+```
+
+Si vous maitrisez ces 10 lignes, vous tenez déjà 80 % du quotidien Elasticsearch.
+
+</details>
+
+<p align="right"><a href="#top">↑ Retour en haut</a></p>
