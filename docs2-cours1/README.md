@@ -149,13 +149,13 @@ Ce dossier rassemble l'intégralité du cours, réorganisé en **18 chapitres ch
 
 ```mermaid
 flowchart LR
-    A[01-03 Théorie] --> B[04-05 Architecture]
-    B --> C[06-09 Neo4j]
-    C --> D[10-11 Installation ES + Labo 1]
-    D --> E[12-13 CRUD ES + Kibana]
-    E --> F[14-16 Bulk + Requêtes]
-    F --> G[17 Labo 2]
-    G --> H[18 Annexe]
+    A["01-03 Theorie"] --> B["04-05 Architecture"]
+    B --> C["06-09 Neo4j"]
+    C --> D["10-11 Installation ES + Labo 1"]
+    D --> E["12-13 CRUD ES + Kibana"]
+    E --> F["14-16 Bulk + Requetes"]
+    F --> G["17 Labo 2"]
+    G --> H["18 Annexe"]
 ```
 
 | Étape           | Chapitres | Objectif                                                                                                     |
