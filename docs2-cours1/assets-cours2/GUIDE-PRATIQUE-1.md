@@ -73,10 +73,10 @@ flowchart LR
 
 ## Étape 1 — Démarrer la stack ELK
 
-**Projet runnable dédié à cette pratique :** [`solutions/ch13-crud-kibana/`](./solutions/ch13-crud-kibana/)
+**Projet runnable dédié à cette pratique :** [`solutions/pratique-07-ch13-crud-kibana/`](./solutions/pratique-07-ch13-crud-kibana/)
 
 ```bash
-cd docs2-cours1/assets-cours2/solutions/ch13-crud-kibana
+cd docs2-cours1/assets-cours2/solutions/pratique-07-ch13-crud-kibana
 docker compose up -d
 ```
 
@@ -90,7 +90,7 @@ Vous devez voir une **console divisée en deux** : à gauche vos requêtes, à d
 
 ## Étape 2 — Comprendre POST vs PUT vs `_create`
 
-Snippet prêt à copier-coller : [`solutions/ch13-crud-kibana/console/01-liste-cours.txt`](./solutions/ch13-crud-kibana/console/01-liste-cours.txt)
+Snippet prêt à copier-coller : [`solutions/pratique-07-ch13-crud-kibana/console/01-liste-cours.txt`](./solutions/pratique-07-ch13-crud-kibana/console/01-liste-cours.txt)
 
 ### 2.1. Préparer un index propre
 
@@ -261,7 +261,7 @@ DELETE bibliotheque/_doc/42
 DELETE bibliotheque
 ```
 
-> **Solution complète à comparer** : [`solutions/ch13-crud-kibana/console/02-bibliotheque-exercices.txt`](./solutions/ch13-crud-kibana/console/02-bibliotheque-exercices.txt)
+> **Solution complète à comparer** : [`solutions/pratique-07-ch13-crud-kibana/console/02-bibliotheque-exercices.txt`](./solutions/pratique-07-ch13-crud-kibana/console/02-bibliotheque-exercices.txt)
 
 ---
 
@@ -342,8 +342,8 @@ Pas de panique : tout est local et reproductible. Recréez l'index, réinsérez 
 | Ressource                                                                                | Quand l'utiliser                            |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------- |
 | [Cours chapitre 13 — CRUD pédagogique](../13-crud-pedagogique-kibana.md)                 | Lecture théorique posée, schémas, analogies SQL |
-| [Solution détaillée Markdown](./solutions/solutions-13-crud-pedagogique.md)              | Toutes les variantes, plus de pièges, scripts |
-| [Projet runnable `ch13-crud-kibana/`](./solutions/ch13-crud-kibana/)                     | Compose + 3 fichiers `console/*.txt` prêts à coller |
+| [Solution détaillée Markdown](./solutions/pratique-07-solutions-crud-pedagogique.md)              | Toutes les variantes, plus de pièges, scripts |
+| [Projet runnable `pratique-07-ch13-crud-kibana/`](./solutions/pratique-07-ch13-crud-kibana/)                     | Compose + 3 fichiers `console/*.txt` prêts à coller |
 | [Énoncé officiel du prof (.docx)](./Kibana%20-%20Pratique%201.docx)                       | Référence d'autorité pour la notation       |
 
 > **Vous avez fini la Pratique 1 ?** Enchaînez avec le [**Guide Pratique 2**](./GUIDE-PRATIQUE-2.md) (Search API + DSL).

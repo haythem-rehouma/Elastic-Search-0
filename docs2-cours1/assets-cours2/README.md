@@ -63,13 +63,13 @@ Les `.docx` du prof sont la **source d'autorité** pour les exigences des labos 
 - **Pratique 1** (`Kibana - Pratique 1.docx`)
   - **Guide étudiant pas-à-pas** : [`GUIDE-PRATIQUE-1.md`](./GUIDE-PRATIQUE-1.md)
   - Cours théorique : [chapitre 13 — CRUD pédagogique](../13-crud-pedagogique-kibana.md)
-  - Solution complète : [`solutions/solutions-13-crud-pedagogique.md`](./solutions/solutions-13-crud-pedagogique.md)
-  - Projet runnable : [`solutions/ch13-crud-kibana/`](./solutions/ch13-crud-kibana/)
+  - Solution complète : [`solutions/pratique-07-solutions-crud-pedagogique.md`](./solutions/pratique-07-solutions-crud-pedagogique.md)
+  - Projet runnable : [`solutions/pratique-07-ch13-crud-kibana/`](./solutions/pratique-07-ch13-crud-kibana/)
 - **Pratique 2** (`Kibana - Pratique 2.docx`)
   - **Guide étudiant pas-à-pas** : [`GUIDE-PRATIQUE-2.md`](./GUIDE-PRATIQUE-2.md)
   - Cours théorique : chapitres [14](../14-import-bulk-dataset.md), [15](../15-requetes-elasticsearch-intermediaire.md), [16](../16-requetes-avancees-kql-esql-dsl.md), [17 — Labo 2](../17-labo2-rapport-dsl-news.md)
-  - Solutions complètes : [`solutions-14`](./solutions/solutions-14-bulk-import.md), [`solutions-15`](./solutions/solutions-15-requetes-intermediaires.md), [`solutions-16`](./solutions/solutions-16-kql-esql-dsl.md), [`solutions-17`](./solutions/solutions-17-labo2.md)
-  - Projets runnables : [`ch14-bulk-import/`](./solutions/ch14-bulk-import/), [`ch15-requetes/`](./solutions/ch15-requetes/), [`ch16-kql-esql-dsl/`](./solutions/ch16-kql-esql-dsl/), [`ch17-labo2/`](./solutions/ch17-labo2/)
+  - Solutions complètes : [`solutions-14`](./solutions/pratique-08-solutions-bulk-import.md), [`solutions-15`](./solutions/pratique-09-solutions-requetes-intermediaires.md), [`solutions-16`](./solutions/pratique-10-solutions-kql-esql-dsl.md), [`solutions-17`](./solutions/labo-2-solutions-rapport-dsl-news.md)
+  - Projets runnables : [`pratique-08-ch14-bulk-import/`](./solutions/pratique-08-ch14-bulk-import/), [`pratique-09-ch15-requetes/`](./solutions/pratique-09-ch15-requetes/), [`pratique-10-ch16-kql-esql-dsl/`](./solutions/pratique-10-ch16-kql-esql-dsl/), [`labo-2-ch17-labo2/`](./solutions/labo-2-ch17-labo2/)
 
 ## Pourquoi un sous-dossier séparé ?
 
@@ -97,14 +97,14 @@ elasticsearch-1/
 │           ├── README.md
 │           ├── 00-setup-complet-a-z.md
 │           ├── solutions-*.md            (8 fichiers de doc détaillée)
-│           ├── ch08-cypher-ia/           <- compose Neo4j + cypher/ + run.sh/.ps1
-│           ├── ch11-labo1-elk/           <- compose ES+KB + scripts backup/restore
-│           ├── ch12-commandes-base/      <- compose + http/ + scripts demo
-│           ├── ch13-crud-kibana/         <- compose + console/ snippets
-│           ├── ch14-bulk-import/         <- compose + mappings/ + run-all.sh/.ps1/.py
-│           ├── ch15-requetes/            <- compose + queries/ + console/
-│           ├── ch16-kql-esql-dsl/        <- compose + console/ KQL/ESQL/DSL
-│           └── ch17-labo2/               <- compose + mappings/ + queries/R01..R10/ + scripts/ + docs/rapport-template.md
+│           ├── pratique-03-ch08-cypher-ia/           <- compose Neo4j + cypher/ + run.sh/.ps1
+│           ├── labo-1-ch11-elk/           <- compose ES+KB + scripts backup/restore
+│           ├── pratique-06-ch12-commandes-base/      <- compose + http/ + scripts demo
+│           ├── pratique-07-ch13-crud-kibana/         <- compose + console/ snippets
+│           ├── pratique-08-ch14-bulk-import/         <- compose + mappings/ + run-all.sh/.ps1/.py
+│           ├── pratique-09-ch15-requetes/            <- compose + queries/ + console/
+│           ├── pratique-10-ch16-kql-esql-dsl/        <- compose + console/ KQL/ESQL/DSL
+│           └── labo-2-ch17-labo2/               <- compose + mappings/ + queries/R01..R10/ + scripts/ + docs/rapport-template.md
 ├── fichiers/                 <- Datasets Spotify (CSV) pour Neo4j
 ├── cypher/                   <- Scripts Cypher de chargement
 ├── notebooks/                <- Notebooks Jupyter

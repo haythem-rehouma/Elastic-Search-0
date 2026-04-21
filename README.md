@@ -33,7 +33,7 @@ flowchart LR
     B --> C{Quelle pratique ?}
     C -->|Pratique 1| D[GUIDE-PRATIQUE-1.md<br/>CRUD Kibana]
     C -->|Pratique 2| E[GUIDE-PRATIQUE-2.md<br/>Search/DSL/Labo 2]
-    D --> F[Projet runnable<br/>ch13-crud-kibana/]
+    D --> F[Projet runnable<br/>pratique-07-ch13-crud-kibana/]
     E --> G[Projets runnables<br/>ch14, ch15, ch16, ch17]
     F --> H[docker compose up -d]
     G --> H
@@ -58,14 +58,14 @@ elasticsearch-0/
 │           ├── 00-setup-complet-a-z.md
 │           ├── solutions-13...17.md   Solutions detaillees
 │           └── chXX-*/                Projets runnables (compose + scripts)
-│               ├── ch08-cypher-ia/
-│               ├── ch11-labo1-elk/
-│               ├── ch12-commandes-base/
-│               ├── ch13-crud-kibana/
-│               ├── ch14-bulk-import/
-│               ├── ch15-requetes/
-│               ├── ch16-kql-esql-dsl/
-│               └── ch17-labo2/
+│               ├── pratique-03-ch08-cypher-ia/
+│               ├── labo-1-ch11-elk/
+│               ├── pratique-06-ch12-commandes-base/
+│               ├── pratique-07-ch13-crud-kibana/
+│               ├── pratique-08-ch14-bulk-import/
+│               ├── pratique-09-ch15-requetes/
+│               ├── pratique-10-ch16-kql-esql-dsl/
+│               └── labo-2-ch17-labo2/
 └── docs-github/                       Bonus : auth multi-comptes GitHub
     ├── README.md
     └── 01-multi-comptes-github-cli.md

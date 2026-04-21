@@ -636,13 +636,13 @@ flowchart TB
 
 | Pour faire…                                       | Allez à                                                    |
 | ------------------------------------------------- | ---------------------------------------------------------- |
-| Vos premiers pas Cypher                           | Solutions [chapitre 8](./solutions-08-cypher-cas-ia.md)    |
-| Le labo 1 ELK (livrable)                          | Solutions [chapitre 11](./solutions-11-labo1-elk.md)       |
-| Maîtriser les `curl` ES                           | Solutions [chapitre 12](./solutions-12-commandes-base.md)  |
-| Le CRUD pédagogique sur `liste_cours`             | Solutions [chapitre 13](./solutions-13-crud-pedagogique.md)|
-| Charger les 200 853 articles News                 | Solutions [chapitre 14](./solutions-14-bulk-import.md)     |
-| Toutes les requêtes intermédiaires                | Solutions [chapitre 15](./solutions-15-requetes-intermediaires.md) |
-| KQL vs ES\|QL vs DSL côte-à-côte                  | Solutions [chapitre 16](./solutions-16-kql-esql-dsl.md)    |
-| Le labo 2 News (livrable)                         | Solutions [chapitre 17](./solutions-17-labo2.md)           |
+| Vos premiers pas Cypher                           | Solutions [chapitre 8](./pratique-03-solutions-cypher-cas-ia.md)    |
+| Le labo 1 ELK (livrable)                          | Solutions [chapitre 11](./labo-1-solutions-elk.md)       |
+| Maîtriser les `curl` ES                           | Solutions [chapitre 12](./pratique-06-solutions-commandes-base.md)  |
+| Le CRUD pédagogique sur `liste_cours`             | Solutions [chapitre 13](./pratique-07-solutions-crud-pedagogique.md)|
+| Charger les 200 853 articles News                 | Solutions [chapitre 14](./pratique-08-solutions-bulk-import.md)     |
+| Toutes les requêtes intermédiaires                | Solutions [chapitre 15](./pratique-09-solutions-requetes-intermediaires.md) |
+| KQL vs ES\|QL vs DSL côte-à-côte                  | Solutions [chapitre 16](./pratique-10-solutions-kql-esql-dsl.md)    |
+| Le labo 2 News (livrable)                         | Solutions [chapitre 17](./labo-2-solutions-rapport-dsl-news.md)           |
 
 <p align="right"><a href="#top">Retour en haut</a></p>

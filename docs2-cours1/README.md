@@ -43,18 +43,18 @@ Ce dossier rassemble l'intégralité du cours, réorganisé en **18 chapitres ch
 
 | Ordre           | Chapitre | Sujet                                         | Énoncé officiel du prof          | Guide / projet runnable                                              |
 | --------------- | :------: | --------------------------------------------- | -------------------------------- | -------------------------------------------------------------------- |
-| **Pratique 1**  | 06       | Installation de Neo4j (Linux + Docker)        | (interne au cours)                | [chapitre 06](./06-installation-neo4j.md)                            |
-| **Pratique 2**  | 07       | Premiers pas en Cypher                        | (interne au cours)                | [chapitre 07](./07-premiers-pas-cypher.md)                           |
-| **Pratique 3**  | 08       | Cas pratique Cypher (cours, profs, IA)        | (interne au cours)                | [`ch08-cypher-ia/`](./assets-cours2/solutions/ch08-cypher-ia/)       |
-| **Pratique 4**  | 09       | Nettoyage / reset Neo4j                       | (interne au cours)                | [chapitre 09](./09-nettoyage-neo4j.md)                               |
-| **Pratique 5**  | 10       | Installation d'Elasticsearch + Kibana         | (interne au cours)                | [chapitre 10](./10-installation-elasticsearch-kibana.md)             |
-| **Labo 1**      | 11       | Mise en place complète ELK avec persistance   | (interne au cours)                | [`ch11-labo1-elk/`](./assets-cours2/solutions/ch11-labo1-elk/)       |
-| **Pratique 6**  | 12       | Commandes de base ES (`curl`)                 | (interne au cours)                | [`ch12-commandes-base/`](./assets-cours2/solutions/ch12-commandes-base/) |
-| **Pratique 7**  | 13       | CRUD pédagogique Kibana                       | `Kibana - Pratique 1.docx`        | [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md) + [`ch13-crud-kibana/`](./assets-cours2/solutions/ch13-crud-kibana/) |
-| **Pratique 8**  | 14       | Bulk import (200 853 docs)                    | (interne au cours)                | [`ch14-bulk-import/`](./assets-cours2/solutions/ch14-bulk-import/)   |
-| **Pratique 9**  | 15       | Requêtes DSL intermédiaires                   | (interne au cours)                | [`ch15-requetes/`](./assets-cours2/solutions/ch15-requetes/)         |
-| **Pratique 10** | 16       | KQL vs ES\|QL vs DSL                          | (interne au cours)                | [`ch16-kql-esql-dsl/`](./assets-cours2/solutions/ch16-kql-esql-dsl/) |
-| **Labo 2**      | 17       | Rapport DSL complet sur l'index `news`        | `Kibana - Pratique 2.docx`        | [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md) + [`ch17-labo2/`](./assets-cours2/solutions/ch17-labo2/) |
+| **Pratique 1**  | 06       | Installation de Neo4j (Linux + Docker)        | (interne au cours)                | [`pratique-01-ch06-installation-neo4j/`](./assets-cours2/solutions/pratique-01-ch06-installation-neo4j/) |
+| **Pratique 2**  | 07       | Premiers pas en Cypher                        | (interne au cours)                | [`pratique-02-ch07-premiers-pas-cypher/`](./assets-cours2/solutions/pratique-02-ch07-premiers-pas-cypher/) |
+| **Pratique 3**  | 08       | Cas pratique Cypher (cours, profs, IA)        | (interne au cours)                | [`pratique-03-ch08-cypher-ia/`](./assets-cours2/solutions/pratique-03-ch08-cypher-ia/)       |
+| **Pratique 4**  | 09       | Nettoyage / reset Neo4j                       | (interne au cours)                | [`pratique-04-ch09-nettoyage-neo4j/`](./assets-cours2/solutions/pratique-04-ch09-nettoyage-neo4j/) |
+| **Pratique 5**  | 10       | Installation d'Elasticsearch + Kibana         | (interne au cours)                | [`pratique-05-ch10-installation-es-kibana/`](./assets-cours2/solutions/pratique-05-ch10-installation-es-kibana/) |
+| **Labo 1**      | 11       | Mise en place complète ELK avec persistance   | (interne au cours)                | [`labo-1-ch11-elk/`](./assets-cours2/solutions/labo-1-ch11-elk/)       |
+| **Pratique 6**  | 12       | Commandes de base ES (`curl`)                 | (interne au cours)                | [`pratique-06-ch12-commandes-base/`](./assets-cours2/solutions/pratique-06-ch12-commandes-base/) |
+| **Pratique 7**  | 13       | CRUD pédagogique Kibana                       | `Kibana - Pratique 1.docx`        | [`GUIDE-PRATIQUE-1.md`](./assets-cours2/GUIDE-PRATIQUE-1.md) + [`pratique-07-ch13-crud-kibana/`](./assets-cours2/solutions/pratique-07-ch13-crud-kibana/) |
+| **Pratique 8**  | 14       | Bulk import (200 853 docs)                    | (interne au cours)                | [`pratique-08-ch14-bulk-import/`](./assets-cours2/solutions/pratique-08-ch14-bulk-import/)   |
+| **Pratique 9**  | 15       | Requêtes DSL intermédiaires                   | (interne au cours)                | [`pratique-09-ch15-requetes/`](./assets-cours2/solutions/pratique-09-ch15-requetes/)         |
+| **Pratique 10** | 16       | KQL vs ES\|QL vs DSL                          | (interne au cours)                | [`pratique-10-ch16-kql-esql-dsl/`](./assets-cours2/solutions/pratique-10-ch16-kql-esql-dsl/) |
+| **Labo 2**      | 17       | Rapport DSL complet sur l'index `news`        | `Kibana - Pratique 2.docx`        | [`GUIDE-PRATIQUE-2.md`](./assets-cours2/GUIDE-PRATIQUE-2.md) + [`labo-2-ch17-labo2/`](./assets-cours2/solutions/labo-2-ch17-labo2/) |
 
 > **Attention à la nomenclature.** Les fichiers `.docx` du prof s'appellent `Kibana - Pratique 1.docx` et `Kibana - Pratique 2.docx`. Dans **notre numérotation interne**, ils correspondent respectivement à **Pratique 7** (chap. 13) et **Labo 2** (chap. 17).
 
@@ -104,14 +104,18 @@ Implémentations **complètes et runnables** de tous les exercices et laboratoir
 | Documentation détaillée                                                                  | Projet runnable (compose + scripts)                                                | Couvre              |
 | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------- |
 | [00 — **Setup complet de A à Z**](./assets-cours2/solutions/00-setup-complet-a-z.md)    | (utilise le `docker-compose.yml` racine du projet)                                  | Setup global         |
-| [08 — Cypher cas IA](./assets-cours2/solutions/solutions-08-cypher-cas-ia.md)           | [`ch08-cypher-ia/`](./assets-cours2/solutions/ch08-cypher-ia/)                      | Chapitre 08          |
-| [11 — Labo 1 ELK](./assets-cours2/solutions/solutions-11-labo1-elk.md)                  | [`ch11-labo1-elk/`](./assets-cours2/solutions/ch11-labo1-elk/)                      | Chapitre 11 (livrable)|
-| [12 — Commandes ES](./assets-cours2/solutions/solutions-12-commandes-base.md)           | [`ch12-commandes-base/`](./assets-cours2/solutions/ch12-commandes-base/)            | Chapitre 12          |
-| [13 — CRUD Kibana](./assets-cours2/solutions/solutions-13-crud-pedagogique.md)          | [`ch13-crud-kibana/`](./assets-cours2/solutions/ch13-crud-kibana/)                  | Chapitre 13          |
-| [14 — Bulk import 200 853 docs](./assets-cours2/solutions/solutions-14-bulk-import.md)  | [`ch14-bulk-import/`](./assets-cours2/solutions/ch14-bulk-import/)                  | Chapitre 14          |
-| [15 — Requêtes DSL intermédiaires](./assets-cours2/solutions/solutions-15-requetes-intermediaires.md) | [`ch15-requetes/`](./assets-cours2/solutions/ch15-requetes/)            | Chapitre 15          |
-| [16 — KQL vs ES\|QL vs DSL](./assets-cours2/solutions/solutions-16-kql-esql-dsl.md)     | [`ch16-kql-esql-dsl/`](./assets-cours2/solutions/ch16-kql-esql-dsl/)                | Chapitre 16          |
-| [17 — Labo 2 News](./assets-cours2/solutions/solutions-17-labo2.md)                     | [`ch17-labo2/`](./assets-cours2/solutions/ch17-labo2/)                              | Chapitre 17 (livrable)|
+| [Pratique 1 — Installation Neo4j](./assets-cours2/solutions/pratique-01-solutions-installation-neo4j.md) | [`pratique-01-ch06-installation-neo4j/`](./assets-cours2/solutions/pratique-01-ch06-installation-neo4j/) | Chapitre 06 |
+| [Pratique 2 — Premiers pas Cypher](./assets-cours2/solutions/pratique-02-solutions-premiers-pas-cypher.md) | [`pratique-02-ch07-premiers-pas-cypher/`](./assets-cours2/solutions/pratique-02-ch07-premiers-pas-cypher/) | Chapitre 07 |
+| [Pratique 3 — Cypher cas IA](./assets-cours2/solutions/pratique-03-solutions-cypher-cas-ia.md) | [`pratique-03-ch08-cypher-ia/`](./assets-cours2/solutions/pratique-03-ch08-cypher-ia/) | Chapitre 08 |
+| [Pratique 4 — Nettoyage Neo4j](./assets-cours2/solutions/pratique-04-solutions-nettoyage-neo4j.md) | [`pratique-04-ch09-nettoyage-neo4j/`](./assets-cours2/solutions/pratique-04-ch09-nettoyage-neo4j/) | Chapitre 09 |
+| [Pratique 5 — Installation ES + Kibana](./assets-cours2/solutions/pratique-05-solutions-installation-es-kibana.md) | [`pratique-05-ch10-installation-es-kibana/`](./assets-cours2/solutions/pratique-05-ch10-installation-es-kibana/) | Chapitre 10 |
+| [Labo 1 — Mise en place ELK](./assets-cours2/solutions/labo-1-solutions-elk.md) | [`labo-1-ch11-elk/`](./assets-cours2/solutions/labo-1-ch11-elk/) | Chapitre 11 (livrable) |
+| [Pratique 6 — Commandes ES](./assets-cours2/solutions/pratique-06-solutions-commandes-base.md) | [`pratique-06-ch12-commandes-base/`](./assets-cours2/solutions/pratique-06-ch12-commandes-base/) | Chapitre 12 |
+| [Pratique 7 — CRUD Kibana](./assets-cours2/solutions/pratique-07-solutions-crud-pedagogique.md) | [`pratique-07-ch13-crud-kibana/`](./assets-cours2/solutions/pratique-07-ch13-crud-kibana/) | Chapitre 13 |
+| [Pratique 8 — Bulk import 200 853 docs](./assets-cours2/solutions/pratique-08-solutions-bulk-import.md) | [`pratique-08-ch14-bulk-import/`](./assets-cours2/solutions/pratique-08-ch14-bulk-import/) | Chapitre 14 |
+| [Pratique 9 — Requêtes DSL intermédiaires](./assets-cours2/solutions/pratique-09-solutions-requetes-intermediaires.md) | [`pratique-09-ch15-requetes/`](./assets-cours2/solutions/pratique-09-ch15-requetes/) | Chapitre 15 |
+| [Pratique 10 — KQL vs ES\|QL vs DSL](./assets-cours2/solutions/pratique-10-solutions-kql-esql-dsl.md) | [`pratique-10-ch16-kql-esql-dsl/`](./assets-cours2/solutions/pratique-10-ch16-kql-esql-dsl/) | Chapitre 16 |
+| [Labo 2 — Rapport DSL News](./assets-cours2/solutions/labo-2-solutions-rapport-dsl-news.md) | [`labo-2-ch17-labo2/`](./assets-cours2/solutions/labo-2-ch17-labo2/) | Chapitre 17 (livrable) |
 | [Index complet des solutions](./assets-cours2/solutions/README.md)                      | (index général)                                                                     | Tous                 |
 
 > **Vous démarrez ?** Lisez d'abord le [Setup A à Z](./assets-cours2/solutions/00-setup-complet-a-z.md) puis attaquez les chapitres dans l'ordre.
