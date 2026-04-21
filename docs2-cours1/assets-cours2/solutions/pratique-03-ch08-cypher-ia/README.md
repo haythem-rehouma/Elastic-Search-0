@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Projet ch08 — Cypher cas pratique IA (Neo4j seul)
 
 Projet **autonome** qui démarre Neo4j 5.20 + APOC, charge les 6 cours, 5 professeurs et toutes les relations en une commande.
@@ -58,3 +59,4 @@ docker compose down -v        # supprime conteneur + volumes (= reset complet)
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

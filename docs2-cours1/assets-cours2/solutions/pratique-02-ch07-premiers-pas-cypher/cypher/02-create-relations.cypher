@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // Etape 2 : creer des relations
 // Chaque personne HABITE_A une ville et CONNAIT d'autres personnes
 
@@ -21,3 +22,4 @@ CREATE (a)-[:CONNAIT {depuis: 2017}]->(c);
 
 MATCH (b:Personne {nom: 'Bob'}), (d:Personne {nom: 'Diana'})
 CREATE (b)-[:CONNAIT {depuis: 2021}]->(d);
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

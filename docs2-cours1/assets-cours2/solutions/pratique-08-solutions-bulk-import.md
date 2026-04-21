@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Solutions — Chapitre 14 : Import du dataset News (`_bulk`) de A à Z
 
 > **Lien chapitre source** : [`14-import-bulk-dataset.md`](../../14-import-bulk-dataset.md)
@@ -468,3 +469,4 @@ Get-ChildItem "$chunkDir\part_*.ndjson" | ForEach-Object {
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

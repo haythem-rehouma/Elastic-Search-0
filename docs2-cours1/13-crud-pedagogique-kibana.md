@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # 13 — CRUD pédagogique avec Kibana Dev Tools
 
 > **Type** : Pratique · **Pré-requis** : [10 — Installation ES + Kibana](./10-installation-elasticsearch-kibana.md), [12 — Commandes ES de base](./12-commandes-base-elasticsearch.md)
@@ -328,3 +329,4 @@ DELETE bibliotheque
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

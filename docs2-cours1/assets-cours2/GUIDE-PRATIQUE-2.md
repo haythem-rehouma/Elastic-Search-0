@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Guide étudiant — Pratique 2 : Search API et Query DSL sur 200 853 articles
 
 > **Énoncé officiel du prof :** [`Kibana - Pratique 2.docx`](./Kibana%20-%20Pratique%202.docx) (dans ce dossier)
@@ -374,3 +375,4 @@ Vous tentez de modifier un mapping après création (interdit). Solution : crée
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

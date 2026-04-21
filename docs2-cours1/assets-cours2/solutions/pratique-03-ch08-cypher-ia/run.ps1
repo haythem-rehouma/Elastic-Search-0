@@ -1,3 +1,4 @@
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 $ErrorActionPreference = "Stop"
 Set-Location -Path $PSScriptRoot
 
@@ -36,3 +37,4 @@ Write-Host "  Login : $($env:NEO4J_USER) / $($env:NEO4J_PASSWORD)"
 Write-Host ""
 Write-Host "  Pour les requêtes d'exploration : ouvrez cypher\05-queries.cypher"
 Write-Host "  Pour démolir tout : docker compose down -v"
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

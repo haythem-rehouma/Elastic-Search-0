@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 set -euo pipefail
 
 echo ">> 1. Indexer un document témoin"
@@ -27,3 +28,4 @@ curl -s 'http://localhost:9200/temoin/_search?pretty'
 
 echo
 echo "OK : la persistance fonctionne (volume nommé ch11_esdata)."
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

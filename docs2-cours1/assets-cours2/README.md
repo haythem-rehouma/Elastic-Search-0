@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # assets-cours2 — Matériel source du cours Elasticsearch
 
 Ce dossier contient :
@@ -119,3 +120,4 @@ elasticsearch-1/
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

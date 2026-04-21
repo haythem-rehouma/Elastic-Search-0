@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 set -euo pipefail
 ES=${ES:-http://localhost:9200}
 cd "$(dirname "$0")/.."
@@ -13,3 +14,4 @@ curl -s -X PUT "$ES/news" \
 
 echo ">> Mapping créé :"
 curl -s "$ES/news/_mapping" | jq '.news.mappings.properties | keys'
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

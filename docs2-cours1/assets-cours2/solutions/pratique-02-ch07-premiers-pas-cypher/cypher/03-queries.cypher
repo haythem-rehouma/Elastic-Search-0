@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // Etape 3 : 8 requetes types pour decouvrir Cypher
 
 // Q1 : tous les noeuds Personne
@@ -31,3 +32,4 @@ RETURN avg(p.age) AS age_moyen;
 // Q8 : depuis quand Alice habite a Montreal ?
 MATCH (p:Personne {nom: 'Alice'})-[r:HABITE_A]->(v:Ville)
 RETURN p.nom AS personne, v.nom AS ville, r.depuis AS depuis_annee;
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

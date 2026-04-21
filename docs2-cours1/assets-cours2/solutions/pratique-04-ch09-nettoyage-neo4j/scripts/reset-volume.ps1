@@ -1,3 +1,4 @@
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 $ErrorActionPreference = 'Stop'
 
 Write-Host "Methode 5 (BRUTALE) : reset complet du volume Docker"
@@ -16,3 +17,4 @@ docker compose up -d
 
 Write-Host ""
 Write-Host "Termine. Base totalement reinitialisee." -ForegroundColor Green
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 set -euo pipefail
 
 echo "==> 1. Conteneur en cours d'execution ?"
@@ -28,3 +29,4 @@ docker exec p01_neo4j cypher-shell -u neo4j -p 'Neo4jStrongPass!' \
 
 echo ""
 echo "Tous les checks ont reussi. Browser accessible sur http://localhost:7474"
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

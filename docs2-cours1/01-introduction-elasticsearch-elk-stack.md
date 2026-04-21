@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # 01 — Introduction à Elasticsearch & à la stack ELK
 
 > **Type** : Théorie · **Pré-requis** : aucun
@@ -1240,3 +1241,4 @@ Si vous maitrisez ces 10 lignes, vous tenez déjà 80 % du quotidien Elasticsear
 </details>
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

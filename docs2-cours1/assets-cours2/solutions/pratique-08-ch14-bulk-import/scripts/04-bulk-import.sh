@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 set -euo pipefail
 ES=${ES:-http://localhost:9200}
 cd "$(dirname "$0")/.."
@@ -29,3 +30,4 @@ echo ">> Terminé en $((end-start))s. Chunks en erreur : $failed / $total."
 curl -s -X POST "$ES/news/_refresh" >/dev/null
 echo ">> Compte final :"
 curl -s "$ES/news/_count" | jq .
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

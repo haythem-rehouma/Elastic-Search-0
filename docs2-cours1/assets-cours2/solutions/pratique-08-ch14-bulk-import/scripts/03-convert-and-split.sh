@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -19,3 +20,4 @@ split -l 5000 --numeric-suffixes=1 --additional-suffix=.ndjson \
       data/news.bulk.ndjson data/chunks/part_
 
 ls data/chunks | wc -l | xargs -I{} echo "   chunks créés : {}"
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

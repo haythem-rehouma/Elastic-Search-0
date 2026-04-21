@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // 03 - Professeurs + relation ENSEIGNER
 MATCH (c1:cours {sigle: '420-AI01-RO'})
 MATCH (c2:cours {sigle: '420-AI02-RO'})
@@ -9,3 +10,4 @@ CREATE (:professeur {matricule: 101, prenom: 'John',    nom: 'Smith'})    -[:ENS
        (:professeur {matricule: 103, prenom: 'Michael', nom: 'Williams'}) -[:ENSEIGNER]->(c3),
        (:professeur {matricule: 104, prenom: 'Sarah',   nom: 'Brown'})    -[:ENSEIGNER]->(c4),
        (:professeur {matricule: 105, prenom: 'Haythem', nom: 'Rehouma'})  -[:ENSEIGNER {nbrhrs: 60}]->(c5);
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

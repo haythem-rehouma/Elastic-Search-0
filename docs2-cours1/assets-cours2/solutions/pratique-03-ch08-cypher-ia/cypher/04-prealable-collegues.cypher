@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // 04 - Relations PREALABLE et COLLEGUES (idempotentes via MERGE)
 
 MATCH (a:cours {sigle: '420-AI05-RO'}), (b:cours {sigle: '420-AI01-RO'})
@@ -20,3 +21,4 @@ MERGE (a)-[:COLLEGUES {programme: 'Intelligence Artificielle'}]->(b);
 MATCH (a:professeur {prenom: 'Michael', nom: 'Williams'}),
       (b:professeur {prenom: 'Sarah',   nom: 'Brown'})
 MERGE (a)-[:COLLEGUES {programme: 'Intelligence Artificielle'}]->(b);
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

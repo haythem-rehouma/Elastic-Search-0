@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // Donnees factices pour pouvoir tester chaque methode de nettoyage
 CREATE (a:User {nom: 'Alice'})
 CREATE (b:User {nom: 'Bob'})
@@ -11,3 +12,4 @@ FOR (u:User) REQUIRE u.nom IS UNIQUE;
 
 CREATE INDEX user_nom_index IF NOT EXISTS
 FOR (u:User) ON (u.nom);
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Pratique 5 — Solutions : Installation ES + Kibana (chap. 10)
 
 > Cible : [chapitre 10](../../10-installation-elasticsearch-kibana.md) · Projet runnable : [`pratique-05-ch10-installation-es-kibana/`](./pratique-05-ch10-installation-es-kibana/)
@@ -98,3 +99,4 @@ Vous voyez la console divisée en deux : à gauche les requêtes, à droite les 
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

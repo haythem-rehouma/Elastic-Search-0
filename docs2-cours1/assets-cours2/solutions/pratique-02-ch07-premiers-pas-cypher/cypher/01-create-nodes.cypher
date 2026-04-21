@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // Pratique 2 - Premiers pas Cypher
 // Etape 1 : creer des noeuds simples
 
@@ -9,3 +10,4 @@ CREATE (d:Personne {nom: 'Diana', age: 28, ville: 'Toronto'});
 CREATE (m:Ville {nom: 'Montreal', pays: 'Canada'});
 CREATE (q:Ville {nom: 'Quebec', pays: 'Canada'});
 CREATE (t:Ville {nom: 'Toronto', pays: 'Canada'});
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

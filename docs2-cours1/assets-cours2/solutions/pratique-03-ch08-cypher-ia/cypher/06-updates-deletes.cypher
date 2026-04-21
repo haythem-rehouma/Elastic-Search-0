@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // 06 - Mises à jour et suppressions (à exécuter manuellement, une par une)
 
 // M1 : Ajouter un bureau à Haythem
@@ -20,3 +21,4 @@ MATCH (p:professeur {prenom:'Haythem',nom:'Rehouma'}) DETACH DELETE p;
 
 // D3 : Tout vider
 MATCH (n) DETACH DELETE n;
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

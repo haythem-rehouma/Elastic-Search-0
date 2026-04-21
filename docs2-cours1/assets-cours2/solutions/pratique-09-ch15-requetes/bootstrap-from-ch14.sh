@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 # Si vous voulez que ch15 utilise un index news déjà chargé,
 # le plus simple est de lancer ch14 directement et d'utiliser sa stack.
 # Ce script propose deux options :
@@ -28,3 +29,4 @@ Une fois l'index prêt, jouez les requêtes :
   - via Kibana Dev Tools (coller console/all-queries.txt)
   - via CLI :  bash run-query.sh 03-bool-complet.json
 EOF
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

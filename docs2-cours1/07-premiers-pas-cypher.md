@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # 07 — Premiers pas en Cypher
 
 > **Type** : Pratique · **Pré-requis** : [06 — Installation Neo4j](./06-installation-neo4j.md)
@@ -132,7 +133,22 @@ RETURN prefixe, college;
 
 ## 5. `UNWIND` et `ORDER BY`
 
-### Découper une liste en lignes
+### `UNWIND` en un mot : **déplier**
+
+`UNWIND` veut dire **« déplier une liste en lignes »**. C'est exactement ça : vous avez **une liste** (un tableau), et vous voulez **une ligne par élément**.
+
+**Image mentale :** vous avez une **boîte de chaussettes**. `UNWIND` ouvre la boîte et **étale chaque chaussette sur la table**, une par une.
+
+```
+Avant UNWIND : [ "AEC", "DEC", "BAC" ]   ← 1 ligne, 1 liste
+Après UNWIND :    "AEC"
+                  "DEC"                   ← 3 lignes, 1 valeur chacune
+                  "BAC"
+```
+
+**Pourquoi c'est utile ?** Cypher (comme SQL) travaille **ligne par ligne**. Si vous avez une liste à l'intérieur d'une cellule, vous ne pouvez ni la trier, ni l'agréger, ni la filtrer simplement. `UNWIND` la transforme en plusieurs lignes — et là, tout devient possible.
+
+### Découper une liste en lignes (exemple concret)
 
 ```cypher
 MATCH (n:cours) WHERE n.sigle = "420-J44-RO"
@@ -140,9 +156,82 @@ UNWIND split(n.diplome, "/") AS element
 RETURN element ORDER BY element ASC;
 ```
 
-| Entrée                                            | Sorties                          |
-| ------------------------------------------------- | -------------------------------- |
-| `n.diplome = "AEC/DEC/MAITRISE/BAC/DOCTORAT"`     | 5 lignes : AEC, DEC, MAITRISE, … |
+**Ce que fait chaque ligne :**
+
+1. `MATCH` trouve **un seul cours** (`420-J44-RO`).
+2. `split(n.diplome, "/")` transforme la chaîne `"AEC/DEC/MAITRISE/BAC/DOCTORAT"` en **liste** `["AEC","DEC","MAITRISE","BAC","DOCTORAT"]`.
+3. `UNWIND ... AS element` **déplie** la liste : 1 ligne devient **5 lignes**, chacune avec une variable `element`.
+4. `ORDER BY element ASC` trie alphabétiquement.
+
+| Entrée                                            | Sorties                                                  |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| `n.diplome = "AEC/DEC/MAITRISE/BAC/DOCTORAT"`     | 5 lignes : `AEC`, `BAC`, `DEC`, `DOCTORAT`, `MAITRISE`   |
+
+<details>
+<summary><b>Comparer : avec et sans <code>UNWIND</code></b></summary>
+
+**Sans `UNWIND` :**
+
+```cypher
+MATCH (n:cours) WHERE n.sigle = "420-J44-RO"
+RETURN split(n.diplome, "/") AS diplomes;
+```
+
+Résultat : **1 ligne**, 1 colonne contenant une liste.
+
+```
+diplomes
+---------------------------------
+["AEC","DEC","MAITRISE","BAC","DOCTORAT"]
+```
+
+**Avec `UNWIND` :**
+
+```cypher
+MATCH (n:cours) WHERE n.sigle = "420-J44-RO"
+UNWIND split(n.diplome, "/") AS element
+RETURN element;
+```
+
+Résultat : **5 lignes**, 1 colonne avec une seule valeur chacune.
+
+```
+element
+--------
+AEC
+DEC
+MAITRISE
+BAC
+DOCTORAT
+```
+
+**C'est exactement la différence entre une liste et un ensemble de lignes.**
+
+</details>
+
+<details>
+<summary><b>Quand utiliser <code>UNWIND</code> en pratique</b></summary>
+
+| Situation                                                           | Utiliser `UNWIND` ?                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------- |
+| Vous avez une **liste** dans une propriété et voulez la trier       | **Oui**                                              |
+| Vous voulez **créer plusieurs nœuds d'un coup** depuis une liste    | **Oui** : `UNWIND [...] AS x CREATE (:Label {...})`  |
+| Vous voulez **compter** combien d'éléments dans une liste           | Non, utilisez `size(liste)`                          |
+| Vous voulez juste **renvoyer** la liste telle quelle                | Non, `RETURN liste` suffit                           |
+| Vous chargez un CSV avec une colonne « tags » séparés par virgules  | **Oui** : `UNWIND split(row.tags, ",") AS tag`       |
+
+**Cas typique d'import en masse :**
+
+```cypher
+UNWIND ["Alice", "Bob", "Carol"] AS prenom
+CREATE (:Personne {nom: prenom});
+```
+
+Crée **3 nœuds** d'un coup.
+
+</details>
+
+> **À retenir en une phrase :** `UNWIND` = transformer **une liste en plusieurs lignes**, pour pouvoir les manipuler une par une comme n'importe quelle ligne Cypher.
 
 ### Trier
 
@@ -187,3 +276,4 @@ MATCH ()-[r]->() RETURN count(r) AS rels;
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

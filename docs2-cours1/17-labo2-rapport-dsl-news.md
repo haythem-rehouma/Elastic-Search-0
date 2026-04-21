@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # 17 — Laboratoire 2 : recherche d'actualités avec ELK
 
 > **Type** : Laboratoire · **Pré-requis** : [11 — Labo 1](./11-labo1-mise-en-place-elk.md) · [14 — Bulk import](./14-import-bulk-dataset.md) · [15 — Requêtes intermédiaires](./15-requetes-elasticsearch-intermediaire.md) · [16 — DSL/KQL/ES\|QL](./16-requetes-avancees-kql-esql-dsl.md)
@@ -519,3 +520,4 @@ flowchart LR
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

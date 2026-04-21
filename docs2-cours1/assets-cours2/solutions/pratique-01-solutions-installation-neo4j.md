@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Pratique 1 — Solutions : Installation de Neo4j (chap. 06)
 
 > Cible : [chapitre 06](../../06-installation-neo4j.md) · Projet runnable : [`pratique-01-ch06-installation-neo4j/`](./pratique-01-ch06-installation-neo4j/)
@@ -63,3 +64,4 @@ bash scripts/verify.sh    # ou .\scripts\verify.ps1
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

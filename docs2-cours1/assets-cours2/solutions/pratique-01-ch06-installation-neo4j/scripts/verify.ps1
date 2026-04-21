@@ -1,3 +1,4 @@
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 $ErrorActionPreference = 'Stop'
 
 Write-Host "==> 1. Conteneur en cours d'execution ?" -ForegroundColor Cyan
@@ -27,3 +28,4 @@ docker exec p01_neo4j cypher-shell -u neo4j -p 'Neo4jStrongPass!' "CREATE (n:Tes
 
 Write-Host ""
 Write-Host "Tous les checks ont reussi. Browser : http://localhost:7474" -ForegroundColor Green
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

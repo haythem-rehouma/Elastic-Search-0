@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # 00 — Setup complet de A à Z (Docker → ELK + Neo4j + Jupyter prêts à l'emploi)
 
 > **Objectif** : partir d'une **machine vierge** et arriver à une stack **fonctionnelle** où vous pouvez ouvrir Kibana, Neo4j Browser et Jupyter et exécuter les exercices des chapitres 8 à 17.
@@ -651,3 +652,4 @@ flowchart TB
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

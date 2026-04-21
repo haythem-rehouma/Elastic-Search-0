@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // 05 - Requêtes d'exploration (à exécuter une par une dans Neo4j Browser)
 
 // Q1 : Tous les profs
@@ -43,3 +44,4 @@ RETURN DISTINCT prefixe, college;
 // Vérifs chiffrées attendues : 6 cours, 5 profs, 5 ENSEIGNER, 3 PREALABLE, 3 COLLEGUES
 MATCH (n)         RETURN labels(n) AS label, count(n) AS nb;
 MATCH ()-[r]->()  RETURN type(r)  AS rel, count(r) AS nb;
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

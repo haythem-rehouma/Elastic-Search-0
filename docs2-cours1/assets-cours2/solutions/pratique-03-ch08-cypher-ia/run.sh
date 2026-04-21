@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 # ch08 - Charge automatiquement les fichiers cypher dans Neo4j via cypher-shell
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -42,3 +43,4 @@ cat <<EOF
   Pour les requêtes d'exploration : ouvrez cypher/05-queries.cypher
   Pour démolir tout : docker compose down -v
 EOF
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

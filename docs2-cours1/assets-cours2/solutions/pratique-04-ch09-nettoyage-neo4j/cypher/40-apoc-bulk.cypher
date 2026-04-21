@@ -1,3 +1,4 @@
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 // Methode 4 (BIG DATA) : nettoyage en lots via APOC
 // A utiliser quand DETACH DELETE plante en OutOfMemory sur des millions de noeuds
 
@@ -9,3 +10,4 @@ CALL apoc.periodic.iterate(
 
 // Verification
 MATCH (n) RETURN count(n) AS noeuds_restants;
+// Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

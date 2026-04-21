@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Pratique 4 — Solutions : Nettoyage et reset Neo4j (chap. 09)
 
 > Cible : [chapitre 09](../../09-nettoyage-neo4j.md) · Projet runnable : [`pratique-04-ch09-nettoyage-neo4j/`](./pratique-04-ch09-nettoyage-neo4j/)
@@ -117,3 +118,4 @@ docker exec -i p04_neo4j cypher-shell -u neo4j -p 'Neo4jStrongPass!' < cypher/30
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

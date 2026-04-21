@@ -1,5 +1,6 @@
 <a id="top"></a>
 
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. -->
 # Pratique 2 — Solutions : Premiers pas en Cypher (chap. 07)
 
 > Cible : [chapitre 07](../../07-premiers-pas-cypher.md) · Projet runnable : [`pratique-02-ch07-premiers-pas-cypher/`](./pratique-02-ch07-premiers-pas-cypher/)
@@ -120,3 +121,4 @@ Capturer la relation dans `r` permet de lire ses propriétés (`r.depuis`).
 ---
 
 *Copyright © Haythem R - Tous droits reserves.*
+<!-- Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG] -->

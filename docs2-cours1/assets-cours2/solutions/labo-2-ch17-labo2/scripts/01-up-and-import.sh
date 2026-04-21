@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 # Pipeline labo2 : up + import + finalize en une commande.
 set -euo pipefail
 ES=${ES:-http://localhost:9200}
@@ -51,3 +52,4 @@ curl -s -X POST "$ES/news/_refresh" >/dev/null
 echo ">> Compte final : $(curl -s "$ES/news/_count" | jq -r .count)"
 echo
 echo "Lancez ensuite : bash scripts/02-run-all-queries.sh"
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]

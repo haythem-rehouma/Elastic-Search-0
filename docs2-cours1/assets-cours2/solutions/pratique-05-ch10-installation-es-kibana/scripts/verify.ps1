@@ -1,3 +1,4 @@
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite.
 $ErrorActionPreference = 'Continue'
 
 Write-Host "==> 1. Conteneurs en cours d'execution ?" -ForegroundColor Cyan
@@ -39,3 +40,4 @@ Write-Host ""
 Write-Host "Tous les checks ont reussi." -ForegroundColor Green
 Write-Host "Elasticsearch : http://localhost:9200"
 Write-Host "Kibana        : http://localhost:5601"
+# Copyright (c) Haythem Rehouma - InSkillFlow‌​‍​​‍​​​‌​‍​‍​​‍​‌​‍​​‍​​‍‌​‍​​​‍‍​‌​‍​​​‍‍‍‌ - Gneurone. Tous droits reserves. Code tague. Reproduction interdite sans autorisation ecrite. [tag-id: HRIFG]
