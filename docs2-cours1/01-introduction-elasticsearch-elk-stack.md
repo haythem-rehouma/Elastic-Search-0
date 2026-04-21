@@ -54,6 +54,113 @@ C'est précisément pour ça qu'on utilise Elasticsearch **à côté** d'une bas
 
 </details>
 
+<details>
+<summary><b>C'est quoi un index B-tree, et pourquoi il marche pour <code>'Mar%'</code> mais pas pour <code>'%ar'</code> ?</b></summary>
+
+### L'idée en une phrase
+
+Un B-tree est un **arbre trié** où chaque nœud sépare les valeurs en intervalles. Pour du texte, il fonctionne **caractère par caractère, depuis le début de la chaîne** — exactement comme un **dictionnaire papier**.
+
+### Exemple : index B-tree sur la colonne `nom`
+
+Imaginez une table `clients(nom)` avec ces 5 valeurs :
+
+```
+Adam
+Adele
+Ali
+Bob
+Boris
+```
+
+Le B-tree les organise comme suit (vue simplifiée) :
+
+```mermaid
+flowchart TD
+    Root["Noeud racine<br/>separateur : Bob"]
+    Root --> L["Sous-arbre gauche<br/>(noms < Bob)"]
+    Root --> R["Sous-arbre droit<br/>(noms >= Bob)"]
+    L --> L1["Adam"]
+    L --> L2["Adele"]
+    L --> L3["Ali"]
+    R --> R1["Bob"]
+    R --> R2["Boris"]
+```
+
+Comment l'arbre compare deux noms : **lettre par lettre, en partant du début**.
+
+| Comparaison      | Résultat                                                                |
+| ---------------- | ----------------------------------------------------------------------- |
+| `Adam` vs `Adele`| 1ère lettre : `A` = `A` → continue. 2e : `d` = `d`. 3e : `a` < `e`. Donc `Adam` < `Adele`. |
+| `Ali` vs `Bob`   | 1ère lettre : `A` < `B`. Réponse immédiate : `Ali` < `Bob`.             |
+| `Bob` vs `Boris` | `B` = `B`, `o` = `o`, `b` < `r`. Donc `Bob` < `Boris`.                  |
+
+### Pourquoi `LIKE 'Mar%'` est rapide
+
+```sql
+SELECT * FROM clients WHERE nom LIKE 'Mar%';
+```
+
+Le moteur SQL connaît le **préfixe** : il commence par `M`, puis `a`, puis `r`. Il **descend dans l'arbre** vers la branche `M`, puis `Ma`, puis `Mar`, et lit toutes les valeurs en partant de là **jusqu'à ce qu'il dépasse `Mas`**. Quelques sauts dans l'arbre, lecture séquentielle de la zone trouvée, **terminé**.
+
+```mermaid
+flowchart LR
+    Q["Requete<br/>LIKE 'Mar%'"] --> S1["Aller a la branche M"]
+    S1 --> S2["Aller a Ma"]
+    S2 --> S3["Aller a Mar"]
+    S3 --> Read["Lire toutes les valeurs<br/>Mara, Marc, Marie, Mario...<br/>jusqu'au prochain prefixe"]
+    Read --> Done["Resultat"]
+```
+
+Sur 10 millions de lignes, environ **20 sauts** dans l'arbre suffisent. C'est `O(log n)`.
+
+### Pourquoi `LIKE '%ar'` est lent
+
+```sql
+SELECT * FROM clients WHERE nom LIKE '%ar';
+```
+
+Le moteur **ne connaît pas le début** de la chaîne. Le `%` au début veut dire « n'importe quoi avant `ar` ». Or l'arbre est trié par **début de chaîne**. Donc :
+
+- `Caesar` se termine par `ar` → branche `C`
+- `Bazaar` se termine par `ar` → branche `B`
+- `Mar` se termine par `ar` → branche `M`
+
+Les correspondances sont **éparpillées partout** dans l'arbre. Aucun moyen de « descendre droit » vers la réponse. Le moteur **abandonne l'index** et fait un **table scan complet** (`O(n)`).
+
+### Tableau récapitulatif des cas
+
+| Requête SQL                  | L'index B-tree aide ?           | Pourquoi                                                       |
+| ---------------------------- | :-----------------------------: | -------------------------------------------------------------- |
+| `WHERE nom = 'Ahmed'`        | Oui                             | Égalité exacte = un seul lookup dans l'arbre                   |
+| `WHERE nom > 'Benoit'`       | Oui                             | L'arbre est trié, on saute à la position et on lit la suite    |
+| `WHERE nom LIKE 'Cha%'`      | Oui                             | Préfixe connu → navigation directe                             |
+| `WHERE nom BETWEEN 'A' AND 'D'` | Oui                          | Plage contiguë de l'arbre                                      |
+| `WHERE nom LIKE '%hat'`      | **Non**                         | Suffixe inconnu → éparpillé                                    |
+| `WHERE nom LIKE '%intel%'`   | **Non**                         | Sous-chaîne au milieu → éparpillé                              |
+| `WHERE LENGTH(nom) = 5`      | **Non**                         | Fonction sur le champ → l'index est invalidé                   |
+
+### Petite nuance : la collation
+
+L'ordre exact dépend de la **collation** de la base :
+
+- Sensible ou non à la **casse** : `Adam` vs `adam` égaux ou pas ?
+- Gestion des **accents** : `é` vs `e` proches ou distincts ?
+- **Règles linguistiques** : en suédois, `å` vient après `z` ; en français, après `a`.
+
+Ces différences sont gérées par la collation (`utf8mb4_unicode_ci`, `fr_FR.UTF-8`, etc.) mais **n'affectent pas le principe** : l'index reste trié par début de chaîne.
+
+### En résumé
+
+| Aspect           | B-tree (SQL)                         | Index inversé (Elasticsearch)            |
+| ---------------- | ------------------------------------ | ---------------------------------------- |
+| Structure        | Arbre trié par valeur                | Dictionnaire mot → liste de docs         |
+| Bon pour…        | Égalité, plage, préfixe              | Recherche full-text, sous-chaîne, fuzzy  |
+| Mauvais pour…    | Sous-chaîne, suffixe, full-text      | Égalité exacte sur clé primaire (overhead) |
+| Complexité       | `O(log n)` si préfixe connu          | `O(1)` lookup + intersection de listes   |
+
+</details>
+
 ---
 
 ## 2. Lucene : le moteur sous le capot
@@ -325,6 +432,153 @@ Ce qui se passe quand un utilisateur cherche un livre :
 Pourquoi des **réplicas** ? Si un bâtiment brûle (panne disque, redémarrage…), les autres bâtiments contiennent une copie de ses étagères. **Aucune donnée perdue, service continu.**
 
 Pourquoi plusieurs **shards** ? Pour pouvoir distribuer les recherches sur plusieurs machines en parallèle. Chercher dans 5 shards de 1 million de documents est **5 fois plus rapide** que chercher dans 1 shard de 5 millions.
+
+</details>
+
+<details>
+<summary><b>C'est quoi un shard, en pratique ? (exemples concrets)</b></summary>
+
+### L'idée en une phrase
+
+Un **shard** est un **morceau d'un index**. Quand un index est trop gros pour tenir sur une seule machine — ou trop lent à interroger — on le **découpe** en plusieurs morceaux qu'on répartit sur les nœuds du cluster.
+
+> Important : un shard est **lui-même un index Lucene complet**, autonome, avec son propre index inversé. Ce n'est pas un « fragment » à recoller, c'est un mini-index.
+
+### Exemple 1 — Un index `news` de 200 853 documents
+
+C'est exactement le dataset utilisé aux chapitres 14 à 17 de ce cours. Voyons comment Elasticsearch le découpe selon le réglage `number_of_shards`.
+
+#### Cas A : `number_of_shards: 1` (par défaut)
+
+Tous les 200 853 documents sont **dans un seul shard**, sur un seul nœud.
+
+```mermaid
+flowchart LR
+    Client[Client] --> N1["Noeud 1<br/>shard 0<br/>200 853 docs"]
+```
+
+- Recherche : un seul nœud travaille → temps `T`.
+- Si on veut accélérer : impossible, on est limité à 1 CPU.
+- Suffisant pour ce cours (un seul Docker, dataset modeste).
+
+#### Cas B : `number_of_shards: 3` sur un cluster de 3 nœuds
+
+Elasticsearch répartit automatiquement :
+
+```mermaid
+flowchart LR
+    Client[Client] --> Coord["Noeud coordinateur"]
+    Coord --> N1["Noeud 1<br/>shard 0<br/>~66 951 docs"]
+    Coord --> N2["Noeud 2<br/>shard 1<br/>~66 951 docs"]
+    Coord --> N3["Noeud 3<br/>shard 2<br/>~66 951 docs"]
+```
+
+- Recherche : les 3 nœuds cherchent **en parallèle** → temps `T/3`.
+- Le coordinateur **fusionne** les 3 résultats partiels et trie le top global.
+- C'est ainsi qu'Elasticsearch encaisse des index de **téraoctets**.
+
+### Exemple 2 — Comment un document est-il assigné à un shard ?
+
+C'est purement mathématique. Pour chaque nouveau document, Elasticsearch fait :
+
+```
+shard_id = hash(_id) modulo number_of_shards
+```
+
+Avec `number_of_shards = 3` :
+
+| `_id` du doc        | `hash(_id)` | `% 3` | Shard cible |
+| ------------------- | ----------- | :---: | :---------: |
+| `article-00001`     | 7 482 109   | 1     | shard 1     |
+| `article-00002`     | 9 318 047   | 0     | shard 0     |
+| `article-00003`     | 4 102 558   | 2     | shard 2     |
+| `article-00004`     | 6 791 230   | 1     | shard 1     |
+| `article-00005`     | 1 555 902   | 0     | shard 0     |
+
+> **Conséquence importante :** une fois qu'un index est créé, on **ne peut pas changer `number_of_shards`** sans tout réindexer. La formule changerait, et tous les documents seraient dans le mauvais shard.
+
+### Exemple 3 — Recherche distribuée pas à pas
+
+Requête : `GET news/_search { "query": { "match": { "headline": "trump" } } }`
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Co as Noeud coordinateur
+    participant S0 as Noeud avec shard 0
+    participant S1 as Noeud avec shard 1
+    participant S2 as Noeud avec shard 2
+
+    C->>Co: GET news/_search
+    par En parallele
+        Co->>S0: cherche dans shard 0
+        Co->>S1: cherche dans shard 1
+        Co->>S2: cherche dans shard 2
+    end
+    S0-->>Co: top 10 local + scores
+    S1-->>Co: top 10 local + scores
+    S2-->>Co: top 10 local + scores
+    Co->>Co: fusionne et trie<br/>par score global
+    Co-->>C: top 10 global
+```
+
+Chaque shard renvoie son **top 10 local**. Le coordinateur fait le **tri final** sur les 30 candidats reçus pour produire le top 10 global. C'est ce qu'on appelle la phase **query then fetch**.
+
+### Exemple 4 — Combien de shards faut-il ?
+
+Règle pratique d'Elastic pour la production :
+
+| Taille de l'index visée | `number_of_shards` recommandé        |
+| ----------------------- | ------------------------------------ |
+| < 1 Go                  | **1**                                |
+| 1 à 30 Go               | 1 (un shard ≤ 30 Go est l'idéal)     |
+| 30 Go à 100 Go          | 2 ou 3                               |
+| 1 To                    | 30 à 50                              |
+
+> **Pour ce cours** : on reste sur **1 shard** dans tous les `docker-compose.yml` (réglage par défaut). Les 200 853 documents font ~250 Mo une fois indexés, largement sous les 30 Go.
+
+### Exemple 5 — Shard primaire vs shard réplica
+
+Chaque shard existe en **deux versions** (au minimum) :
+
+| Type            | Rôle                                              | Combien                              |
+| --------------- | ------------------------------------------------- | ------------------------------------ |
+| **Primaire**    | Reçoit les écritures, source de vérité            | 1 par shard, jamais déplacé          |
+| **Réplica**     | Copie en lecture seule, prend le relais en cas de panne | 0 ou plus (réglage `number_of_replicas`) |
+
+Avec `number_of_shards: 3` et `number_of_replicas: 1`, on a au total **6 shards** (3 primaires + 3 réplicas) répartis sur les nœuds **avec la règle « jamais le primaire et son réplica sur le même nœud »** :
+
+```mermaid
+flowchart TB
+    subgraph N1["Noeud 1"]
+        P0[Primaire 0]
+        R1[Replica 1]
+    end
+    subgraph N2["Noeud 2"]
+        P1[Primaire 1]
+        R2[Replica 2]
+    end
+    subgraph N3["Noeud 3"]
+        P2[Primaire 2]
+        R0[Replica 0]
+    end
+```
+
+Si le **Nœud 1 plante**, le **Réplica 0** sur le Nœud 3 est **promu primaire** automatiquement, et le service continue **sans perte de données**.
+
+### Tableau récapitulatif
+
+| Question                                              | Réponse                                                     |
+| ----------------------------------------------------- | ----------------------------------------------------------- |
+| Un shard, c'est quoi techniquement ?                  | Un index Lucene complet et autonome.                        |
+| Comment un doc est-il placé dans un shard ?           | `hash(_id) % number_of_shards`                              |
+| Peut-on changer `number_of_shards` après création ?   | Non, seulement en réindexant.                                |
+| Pour ce cours, combien de shards ?                    | 1 (par défaut). Largement suffisant.                         |
+| Et `number_of_replicas` ?                             | 0 pendant l'import, 1 ensuite. Voir chapitre 14.            |
+| Pourquoi plus de shards = plus rapide ?               | Recherche parallèle sur N nœuds simultanés.                 |
+| Pourquoi pas 1000 shards alors ?                      | Trop d'overhead (chaque shard coûte de la RAM et un thread). |
+
+> On approfondit la planification des shards au [chapitre 03](./03-concepts-cles-elasticsearch.md).
 
 </details>
 
