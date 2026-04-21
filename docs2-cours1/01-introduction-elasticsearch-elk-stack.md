@@ -366,6 +366,293 @@ flowchart LR
 
 ---
 
+#### Quel langage pour quel composant ? (clarification importante)
+
+**Question fréquente : « Y a-t-il un langage différent pour Elasticsearch, Logstash et Kibana ? Et le DSL, c'est pour quoi ? »**
+
+**Réponse courte :**
+
+- **Elasticsearch** a son propre langage de requête : le **Query DSL** (un JSON envoyé en HTTP).
+- **Logstash** a son propre langage de **configuration de pipeline** (style Ruby, avec `input { } filter { } output { }`).
+- **Kibana** n'a **pas vraiment** de langage à lui : c'est une **interface graphique** qui *réutilise* les langages d'Elasticsearch. Pour la barre de recherche rapide, il propose en plus le **KQL**.
+
+```mermaid
+flowchart TB
+    subgraph Logstash_box ["Logstash (transformation)"]
+        LSL["Langage : config Logstash<br/>(Ruby-like : input / filter / output)"]
+    end
+
+    subgraph ES_box ["Elasticsearch (moteur)"]
+        DSL["Langage natif : Query DSL (JSON)<br/>+ ES-QL, SQL, EQL via API REST"]
+    end
+
+    subgraph Kibana_box ["Kibana (UI)"]
+        KQL["KQL<br/>(barre Discover, filtres dashboards)"]
+        DEV["Dev Tools<br/>(envoie du Query DSL ou ES-QL a ES)"]
+    end
+
+    Logstash_box -->|HTTP bulk| ES_box
+    Kibana_box -->|HTTP requete| ES_box
+```
+
+**Tableau récapitulatif :**
+
+| Composant         | Langage(s) qu'il accepte                                  | Vous écrivez quoi, où ?                                                                                |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Logstash**      | Sa propre **DSL de configuration** (style Ruby)           | Dans des fichiers `.conf` du serveur Logstash. **Pas de requêtes**, juste des règles de transformation. |
+| **Elasticsearch** | **Query DSL** (JSON, langage natif) + ES\|QL + SQL + EQL  | Vous envoyez du **JSON via HTTP** (curl, client Python, ou Dev Tools de Kibana).                       |
+| **Kibana**        | **KQL** (barre de recherche) + UI graphique               | Dans la barre Discover ou les filtres de dashboard. Et **dans Dev Tools**, vous écrivez du **DSL d'ES**. |
+
+**Donc : DSL = langage d'Elasticsearch, pas de Kibana.** Vous l'écrivez **dans Kibana** parce que Kibana propose un éditeur pratique (Dev Tools), mais c'est bien Elasticsearch qui le comprend et l'exécute.
+
+---
+
+#### Vulgarisation : quel langage, quand, pourquoi, pour qui ?
+
+Image mentale simple : pensez à un **restaurant**.
+
+- **Logstash**, c'est le **livreur** qui apporte les ingrédients en cuisine. Il a sa propre fiche de route (sa config). Il **ne prend jamais** la commande des clients.
+- **Elasticsearch**, c'est la **cuisine + le livre de recettes**. Toutes les vraies préparations (recherches, agrégations) se font ici. La langue officielle de la cuisine, c'est le **Query DSL**.
+- **Kibana**, c'est la **salle + le menu illustré**. Le client (vous) y consulte des photos (dashboards), tape une commande rapide en **KQL**, ou descend en cuisine via **Dev Tools** parler la langue officielle (DSL).
+
+**Tableau de décision « lequel j'utilise et pourquoi ? » :**
+
+| Langage              | C'est quoi en 1 ligne                                | Quand l'utiliser                                                            | Pourquoi (avantage)                                              | Cas d'usage typique                                                              | Qui l'utilise en pratique                            |
+| -------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Config Logstash**  | Un fichier `.conf` qui décrit un pipeline ETL        | Vos données arrivent **mal formées** et doivent être nettoyées avant ES.    | Très puissant : grok, geoip, mutate, conditionnels.              | Parser des logs nginx multilignes, enrichir avec geoip, router par environnement. | **DevOps / data engineer** qui installe le pipeline. |
+| **KQL**              | Petit langage de la barre de recherche Kibana        | Vous **explorez** vos données dans Discover ou filtrez un dashboard.        | Ultra-simple, lisible, autocomplétion.                           | Trouver tous les logs où `status:500 AND host:"web-01"`.                          | **Analyste, support, étudiant qui débute, manager curieux**. |
+| **Query DSL**        | Le JSON natif d'Elasticsearch envoyé en HTTP         | Vous voulez **toute la puissance** : tri, scoring, agrégations complexes.   | Tout est possible : `bool`, `filter`, `boost`, `aggs`, scripts.  | Construire une vraie barre de recherche dans une appli Python/Node/Java.         | **Développeur backend, data engineer**.              |
+| **ES\|QL**           | Langage tabulaire style SQL piped (`FROM ... \| ...`) | Vous voulez un **rapport** ou un calcul **type SQL**.                      | Lisible comme du SQL. Pipelines d'instructions.                  | « Top 10 catégories de news par mois », rapports métier.                          | **Analyste data, BI, data engineer**.                |
+| **SQL (`/_sql`)**    | Vrai SQL accepté par ES (sous-ensemble)              | Vous **connaissez SQL** et voulez interroger ES sans rien apprendre.        | Zéro courbe d'apprentissage si vous venez du SQL.                | Outil de reporting tiers branché en JDBC/ODBC.                                   | **Analyste BI, dev qui ne veut pas apprendre DSL**.  |
+| **EQL**              | Event Query Language (séquences d'événements)        | Vous traquez des **séquences** dans des logs (sécurité).                    | Détecte des patterns dans le temps (`A then B within 5m`).       | SIEM : « connexion échouée puis réussie depuis la même IP en moins d'1 min ».    | **Analyste sécurité (SOC), threat hunter**.          |
+| **Painless**         | Petit langage de script (Java-like) interne à ES     | Vous voulez **calculer un champ à la volée** ou un score custom.            | Sandboxé, rapide, intégré partout (runtime fields, scoring).     | Champ calculé `prix_ttc = prix * 1.20`.                                          | **Développeur avancé**.                              |
+
+**Règle pédagogique pour ce cours :**
+
+```mermaid
+flowchart LR
+    A["Je veux explorer<br/>visuellement"] --> B["Kibana + KQL"]
+    C["Je veux un rapport<br/>tabulaire"] --> D["Kibana + ES-QL"]
+    E["Je code une appli<br/>qui parle a ES"] --> F["Query DSL en JSON"]
+    G["Je nettoie des<br/>logs avant ingestion"] --> H["Config Logstash"]
+```
+
+> **L'ordre dans lequel vous allez les apprendre dans ce cours :**
+> 1. **KQL** (chap. 12-13, dans Kibana Discover) — le plus simple, immédiat.
+> 2. **Query DSL** (chap. 14-16, dans Dev Tools) — le plus important pour la suite.
+> 3. **ES\|QL** (chap. 16) — bonus pour les rapports.
+> 4. **Config Logstash** : seulement mentionnée (chap. 5), pas pratiquée — on simule l'ingestion avec des scripts Python plus simples.
+
+---
+
+#### Obligatoire ou optionnel ? Quand DSL, quand KQL, quand EQL ?
+
+**Réponse directe : non, vous n'avez PAS besoin de tous les apprendre.** Chaque langage a un usage précis. Voici la grille de décision **par profil** et **par situation**.
+
+##### Tableau « Obligatoire vs optionnel » selon votre profil
+
+| Langage              | Étudiant ce cours   | Analyste / support       | Développeur backend   | Data engineer       | Analyste sécurité (SOC) |
+| -------------------- | ------------------- | ------------------------ | --------------------- | ------------------- | ------------------------ |
+| **KQL**              | **Obligatoire**     | **Obligatoire**          | Optionnel             | Utile               | **Obligatoire**          |
+| **Query DSL**        | **Obligatoire**     | Optionnel                | **Obligatoire**       | **Obligatoire**     | Utile                    |
+| **ES\|QL**           | Recommandé          | Utile                    | Utile                 | **Obligatoire**     | Utile                    |
+| **SQL** (`/_sql`)    | Optionnel           | Utile (si vient du SQL)  | Optionnel             | Utile               | Optionnel                |
+| **EQL**              | Optionnel           | Optionnel                | Optionnel             | Optionnel           | **Obligatoire**          |
+| **Painless**         | Optionnel           | Non                      | Recommandé            | Recommandé          | Optionnel                |
+| **Config Logstash**  | Optionnel           | Non                      | Optionnel             | **Obligatoire**     | Optionnel                |
+
+**Lecture du tableau :**
+- **Obligatoire** = sans ça, vous ne pouvez pas faire votre travail.
+- **Recommandé** = vous y gagnerez beaucoup, à apprendre dès que possible.
+- **Utile** = bien à savoir, mais pas urgent.
+- **Optionnel** = à apprendre seulement si vous tombez sur un cas qui le nécessite.
+
+##### Arbre de décision : « j'ai cette situation, j'utilise quel langage ? »
+
+```mermaid
+flowchart TD
+    START["J'ai un besoin avec Elasticsearch"] --> Q1{"Je tape dans la<br/>barre Discover de Kibana ?"}
+    Q1 -->|Oui| KQL_OK["KQL"]
+    Q1 -->|Non| Q2{"Je veux un tableau<br/>style SQL avec STATS BY ?"}
+    Q2 -->|Oui| ESQL_OK["ES-QL"]
+    Q2 -->|Non| Q3{"Je code une appli<br/>(Python, Java, Node) ?"}
+    Q3 -->|Oui| DSL_OK["Query DSL en JSON"]
+    Q3 -->|Non| Q4{"Je traque des sequences<br/>d'evenements securite ?"}
+    Q4 -->|Oui| EQL_OK["EQL"]
+    Q4 -->|Non| Q5{"Je dois calculer un champ<br/>a la volee dans ES ?"}
+    Q5 -->|Oui| PAINLESS_OK["Painless script"]
+    Q5 -->|Non| Q6{"Je veux brancher Tableau<br/>Power BI ou JDBC ?"}
+    Q6 -->|Oui| SQL_OK["SQL via /_sql"]
+    Q6 -->|Non| DSL_OK
+```
+
+##### Quand chaque langage devient *vraiment* obligatoire (cas concrets)
+
+<details>
+<summary><b>Quand <b>KQL</b> est obligatoire</b></summary>
+
+- Vous ouvrez **Discover** dans Kibana et tapez dans la barre de recherche → c'est forcément du KQL (ou du Lucene legacy).
+- Vous configurez un filtre dans un dashboard partagé.
+- Vous créez une **alerte Kibana** basée sur une condition simple (`status:500 AND service:"checkout"`).
+
+**Sans KQL, vous ne savez pas vous servir de Kibana au-delà du clic.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>Query DSL</b> est obligatoire</b></summary>
+
+- Vous codez une **fonction de recherche** dans une appli web (`elasticsearch-py`, `@elastic/elasticsearch`, etc.).
+- Vous voulez **trier par score custom** (`function_score`, `boost` par champ).
+- Vous voulez des **agrégations imbriquées** (top 10 catégories → top 3 articles dans chacune).
+- Vous voulez un **highlight** des mots qui matchent (`<em>...</em>`).
+- Vous voulez **paginer profondément** avec `search_after` + `pit`.
+- Vous configurez une **alerte avancée** (Watcher) ou un **transform** (rollup).
+
+**Dès qu'on quitte Kibana et qu'on code, le DSL devient incontournable.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>ES|QL</b> est obligatoire</b></summary>
+
+- Vous produisez un **rapport tabulaire** : « combien d'articles par catégorie et par mois, triés par volume ».
+- Vous faites du **debug en console** : `FROM logs-* | WHERE level=="ERROR" | STATS count=COUNT(*) BY service | SORT count DESC | LIMIT 10`.
+- Vous **enchaînez des transformations** (équivalent SQL avec `WHERE`, `STATS`, `SORT`, `LIMIT`, `EVAL`, `KEEP`, `DROP`).
+
+**Sans ES\|QL, certains rapports demanderaient un DSL avec 5 niveaux d'agrégations imbriquées et seraient illisibles.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>EQL</b> est obligatoire</b></summary>
+
+- **Sécurité uniquement.** Vous travaillez dans un SOC, vous utilisez Elastic Security.
+- Vous cherchez des **séquences temporelles** : « processus A puis fichier B créé puis connexion C, le tout en moins de 30 secondes, sur la même machine ».
+- Exemple typique : `sequence by host.name [process where process.name == "powershell.exe"] [file where file.name like "*.ps1"]`.
+
+**Si vous ne faites pas de cybersécurité, vous n'aurez probablement jamais à écrire de l'EQL.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>SQL (/_sql)</b> est obligatoire</b></summary>
+
+- Vous branchez **Tableau, Power BI, Excel, DBeaver** sur Elasticsearch via le **driver JDBC/ODBC** d'Elastic.
+- Vous avez une équipe qui **ne veut pas apprendre le DSL** mais qui maîtrise SQL.
+- Vous faites du prototypage rapide en console.
+
+**C'est rarement obligatoire ; c'est surtout un confort pour les profils SQL.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>Painless</b> est obligatoire</b></summary>
+
+- Vous voulez un **runtime field** : un champ calculé à la lecture (ex. `prix_ttc = prix * 1.20`).
+- Vous voulez **personnaliser le scoring** (`script_score`).
+- Vous voulez un **ingest pipeline** custom (transformer un champ avant indexation).
+
+**Toujours en complément du DSL, jamais seul.**
+
+</details>
+
+<details>
+<summary><b>Quand <b>Config Logstash</b> est obligatoire</b></summary>
+
+- Vous **ingérez des logs bruts mal formés** (multilignes, formats hétérogènes) qui doivent être parsés (`grok`).
+- Vous devez **enrichir** à l'ingestion (geoip, lookup d'utilisateur).
+- Vous avez **plusieurs sources** à router vers plusieurs destinations.
+
+**Si vos données arrivent déjà en JSON propre, vous n'avez pas besoin de Logstash : un simple `_bulk` ou Filebeat suffit.**
+
+</details>
+
+##### Le minimum vital pour ce cours
+
+Si vous deviez n'apprendre **que deux** langages pour réussir le cours et 95 % des cas pratiques :
+
+```mermaid
+flowchart LR
+    A["KQL"] -->|"explorer / filtrer<br/>dans Kibana"| GO["Vous etes opérationnel"]
+    B["Query DSL"] -->|"requetes serieuses<br/>dans Dev Tools ou code"| GO
+```
+
+Les autres (ES\|QL, EQL, SQL, Painless, Logstash) viendront **au cas par cas**, quand un besoin précis se présentera.
+
+<details>
+<summary><b>Exemples côte à côte (le même besoin, dans chaque composant)</b></summary>
+
+**Besoin pédagogique :** je veux **trouver tous les logs nginx avec un statut 500**.
+
+**1) Côté Logstash** — config qui ingère les logs et garde **seulement** les 500 :
+
+```ruby
+input  { beats { port => 5044 } }
+filter {
+  grok { match => { "message" => "%{COMBINEDAPACHELOG}" } }
+  if [response] != "500" { drop {} }
+}
+output { elasticsearch { hosts => ["es:9200"] index => "errors-%{+YYYY.MM.dd}" } }
+```
+
+→ C'est de la **configuration**, pas une requête. Logstash ne sait pas « chercher » dans Elasticsearch.
+
+**2) Côté Elasticsearch (Query DSL en JSON)** — chercher les 500 dans l'index `nginx-*` :
+
+```json
+GET /nginx-*/_search
+{
+  "query": {
+    "term": { "response.keyword": "500" }
+  }
+}
+```
+
+→ C'est ce JSON que tous les clients envoient à ES (Python, curl, Java, Dev Tools de Kibana…).
+
+**3) Côté Kibana — KQL (barre Discover)** — la même chose, en une ligne lisible :
+
+```kql
+response : "500"
+```
+
+→ Kibana **traduit** ce KQL en Query DSL et l'envoie à Elasticsearch. Vous obtenez le même résultat, plus rapidement à taper.
+
+**4) Côté Kibana — ES\|QL (onglet Discover ES\|QL)** — pour un rapport tabulaire :
+
+```esql
+FROM nginx-*
+| WHERE response == "500"
+| STATS count = COUNT(*) BY host.name
+| SORT count DESC
+```
+
+→ C'est aussi exécuté **par Elasticsearch**, mais le langage `ES|QL` (style SQL piped) est plus naturel pour des rapports.
+
+</details>
+
+<details>
+<summary><b>Et si je n'utilise QUE Kibana ? Que dois-je apprendre comme langage ?</b></summary>
+
+C'est le cas le plus courant pour un débutant. Voici ce que vous écrirez réellement :
+
+| Ce que vous faites dans Kibana                                   | Langage utilisé                | Compétence requise                                |
+| ---------------------------------------------------------------- | ------------------------------ | ------------------------------------------------- |
+| Taper dans la barre Discover                                     | **KQL**                        | Très simple : `champ : valeur AND ...`            |
+| Filtrer un dashboard via les boutons                             | Aucun (UI clic)                | Aucune                                            |
+| Créer une visualisation (Lens)                                   | Aucun (UI drag-and-drop)       | Aucune                                            |
+| Écrire une requête puissante dans **Dev Tools → Console**        | **Query DSL** (JSON)           | Moyenne (c'est ce qu'on apprend chap. 12 → 16)    |
+| Faire un rapport tabulaire dans Discover ES\|QL                  | **ES\|QL**                     | Faible si vous connaissez SQL                     |
+| Configurer une **alerte** (Alerting)                             | KQL ou DSL selon le type       | Moyenne                                           |
+| Créer un **runtime field**                                       | **Painless** (script Java-like)| Plus avancée                                      |
+
+**En pratique pour ce cours :** vous apprendrez d'abord **KQL** (rapide, visuel) puis **Query DSL** (puissant, indispensable côté code).
+
+</details>
+
+---
+
 #### Beats vs Logstash : qui transforme, qui se contente de collecter ?
 
 Le schéma ci-dessus regroupe **Beats**, **Logstash** et **scripts Python** dans une même case d'« ingestion ». En réalité, ces trois outils n'ont **pas du tout** le même rôle : certains se contentent de **collecter** la donnée brute, d'autres la **transforment** avant de l'envoyer à Elasticsearch.
