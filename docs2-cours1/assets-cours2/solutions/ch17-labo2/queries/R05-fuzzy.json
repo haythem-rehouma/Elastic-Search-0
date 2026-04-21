@@ -1,0 +1,7 @@
+{
+  "query": {
+    "match": {
+      "headline": { "query": "presdent obmaa", "fuzziness": "AUTO" }
+    }
+  }
+}

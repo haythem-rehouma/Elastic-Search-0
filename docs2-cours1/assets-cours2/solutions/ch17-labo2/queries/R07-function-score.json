@@ -1,0 +1,13 @@
+{
+  "_source": ["headline","category"],
+  "query": {
+    "function_score": {
+      "query":      { "match": { "headline": "Trump" } },
+      "boost_mode": "multiply",
+      "score_mode": "sum",
+      "functions": [
+        { "filter": { "term": { "category.keyword": "POLITICS" } }, "weight": 2.0 }
+      ]
+    }
+  }
+}

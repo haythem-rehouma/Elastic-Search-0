@@ -1,0 +1,67 @@
+# Coller ce contenu dans Kibana → Dev Tools → Console
+# (http://localhost:5601/app/dev_tools#/console)
+
+# === 1. PRÉPARATION ===
+DELETE liste_cours
+PUT liste_cours
+GET liste_cours
+
+# === 2. INSERTION (POST auto-id, PUT id, POST id) ===
+POST liste_cours/_doc
+{ "nom_professeur": "Jean Dupon", "sigle_cours": "ABC123" }
+
+PUT liste_cours/_doc/1
+{ "nom_professeur": "Robert", "sigle_cours": "ABC456" }
+
+POST liste_cours/_doc/2
+{ "nom_professeur": "Fred Cote", "sigle_cours": "DEF123" }
+
+# === 3. ERREUR ATTENDUE : PUT sans id ===
+PUT liste_cours/_doc
+{ "nom_professeur": "Alex Tremblay", "sigle_cours": "DER324" }
+# → 405 Method Not Allowed
+
+# === 4. _create : refus d'écrasement ===
+PUT liste_cours/_create/1
+{ "nom_professeur": "Sam Cote", "sigle_cours": "ZZZ999" }
+# → 409 Conflict (id 1 existe)
+
+PUT liste_cours/_create/3
+{ "nom_professeur": "Albert Beau-séjour", "sigle_cours": "ABC324" }
+# → 201 created (id 3 n'existait pas)
+
+# === 5. LECTURE ===
+GET liste_cours/_doc/1
+GET liste_cours/_doc/2
+GET liste_cours/_doc/3
+GET _cat/indices?v
+GET liste_cours/_search
+
+# === 6. UPDATE PARTIEL ===
+POST liste_cours/_update/1
+{ "doc": { "nom_professeur": "Robert Tremblay" } }
+
+GET liste_cours/_doc/1
+# → sigle_cours préservé
+
+POST liste_cours/_update/1
+{ "doc": { "salle_cours": "salle1" } }
+
+GET liste_cours/_doc/1
+# → 3 champs maintenant
+
+# === 7. PIÈGE : PUT _doc remplace TOUT ===
+PUT liste_cours/_doc/1
+{ "nom_professeur": "Robert Tremblay" }
+
+GET liste_cours/_doc/1
+# → sigle_cours et salle_cours ONT DISPARU !
+
+# === 8. SUPPRESSION ===
+DELETE liste_cours/_doc/1
+GET liste_cours/_doc/1
+# → "found": false
+
+DELETE liste_cours
+GET liste_cours
+# → 404 index_not_found_exception

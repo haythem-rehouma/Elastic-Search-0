@@ -1,0 +1,37 @@
+# Démo claire : update partiel vs remplacement complet
+
+DELETE demo
+POST demo/_doc/1
+{ "a": 1, "b": 2, "c": 3 }
+
+# Cas 1 : UPDATE partiel (préserve b et c)
+POST demo/_update/1
+{ "doc": { "a": 100 } }
+
+GET demo/_doc/1
+# → { "a": 100, "b": 2, "c": 3 }
+
+# Cas 2 : PUT _doc → REMPLACEMENT TOTAL (b et c disparaissent !)
+PUT demo/_doc/1
+{ "a": 999 }
+
+GET demo/_doc/1
+# → { "a": 999 }
+
+# Cas 3 : Update via script Painless (incrément)
+POST demo/_doc/1
+{ "a": 999, "b": 2, "c": 3 }
+
+POST demo/_update/1
+{
+  "script": {
+    "source": "ctx._source.a += params.delta",
+    "lang":   "painless",
+    "params": { "delta": 5 }
+  }
+}
+
+GET demo/_doc/1
+# → { "a": 1004, "b": 2, "c": 3 }
+
+DELETE demo

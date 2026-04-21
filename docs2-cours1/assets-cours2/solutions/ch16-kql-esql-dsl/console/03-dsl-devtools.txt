@@ -1,0 +1,64 @@
+# Requêtes Query DSL — à coller dans Kibana → Dev Tools → Console
+
+# Q1 : POLITICS
+GET news/_search
+{ "size": 20, "query": { "term": { "category.keyword": "POLITICS" } } }
+
+# Q2 : Période
+GET news/_search
+{ "size": 20,
+  "query": { "range": { "date": { "gte": "2018-05-20", "lt": "2018-06-01" } } } }
+
+# Q3 : Plein texte multi-champ
+GET news/_search
+{ "size": 20,
+  "query": { "multi_match": { "query": "Trump", "fields": ["headline","short_description"] } } }
+
+# Q4 : Combinaison filtres avec bool
+GET news/_search
+{ "size": 50, "_source": ["date","category","authors","headline"],
+  "query": { "bool": {
+    "filter": [
+      { "terms": { "category.keyword": ["WORLD NEWS","POLITICS"] } },
+      { "range": { "date": { "gte": "2018-05-25" } } }
+    ],
+    "must": [ { "match": { "authors": "Ron Dicker" } } ] } } }
+
+# Q5 : Top 10 catégories (aggs)
+GET news/_search
+{ "size": 0,
+  "aggs": { "by_category": { "terms": { "field": "category.keyword", "size": 10 } } } }
+
+# Q6 : Histogramme par jour (POLITICS)
+GET news/_search
+{ "size": 0,
+  "query": { "term": { "category.keyword": "POLITICS" } },
+  "aggs":  { "per_day": { "date_histogram": { "field": "date", "calendar_interval": "day" } } } }
+
+# Q7 : Top auteurs sur une période
+GET news/_search
+{ "size": 0,
+  "query": { "range": { "date": { "gte": "2018-05-20", "lte": "2018-05-31" } } },
+  "aggs": { "top_authors": { "terms": { "field": "authors.keyword", "size": 10 } } } }
+
+# === DSL UNIQUEMENT (pas faisable en KQL/ES|QL) ===
+
+# Q8 : Boost par function_score
+GET news/_search
+{ "query": { "function_score": {
+    "query":      { "match": { "headline": "Trump" } },
+    "boost_mode": "multiply",
+    "score_mode": "sum",
+    "functions":  [ { "filter": { "term": { "category.keyword": "POLITICS" } }, "weight": 2.0 } ] } } }
+
+# Q9 : Highlight
+GET news/_search
+{ "query": { "multi_match": { "query": "North Korea", "fields": ["headline","short_description"] } },
+  "highlight": { "fields": { "headline": {}, "short_description": {} } } }
+
+# Q10 : Aggs imbriquées (catégorie → top auteurs)
+GET news/_search
+{ "size": 0,
+  "aggs": { "by_cat": {
+    "terms": { "field": "category.keyword", "size": 5 },
+    "aggs": { "top_authors": { "terms": { "field": "authors.keyword", "size": 3 } } } } } }

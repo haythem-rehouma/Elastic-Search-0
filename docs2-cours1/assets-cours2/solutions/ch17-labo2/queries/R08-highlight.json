@@ -1,0 +1,9 @@
+{
+  "_source": ["headline","short_description","date"],
+  "query":   { "match": { "short_description": "North Korea summit" } },
+  "highlight": {
+    "fields":    { "headline": {}, "short_description": {} },
+    "pre_tags":  ["<mark>"],
+    "post_tags": ["</mark>"]
+  }
+}

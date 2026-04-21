@@ -1,0 +1,81 @@
+### Fichier .http compatible REST Client (VS Code) ou IntelliJ HTTP Client
+### Préfixe : http://localhost:9200
+
+@host = http://localhost:9200
+
+### 1. Cluster
+GET {{host}}/
+
+### 2. Santé
+GET {{host}}/_cluster/health?pretty
+
+### 3. Liste des nœuds
+GET {{host}}/_cat/nodes?v
+
+### 4. Liste des indices
+GET {{host}}/_cat/indices?v
+
+### 5. Nettoyer
+DELETE {{host}}/produits
+
+### 6. Créer l'index avec mapping
+PUT {{host}}/produits
+Content-Type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "nom":   { "type": "text" },
+      "prix":  { "type": "float" },
+      "stock": { "type": "integer" }
+    }
+  }
+}
+
+### 7. Voir le mapping
+GET {{host}}/produits/_mapping?pretty
+
+### 8. Indexer doc id=1
+POST {{host}}/produits/_doc/1
+Content-Type: application/json
+
+{ "nom": "Casque Bluetooth", "prix": 89.90, "stock": 12 }
+
+### 9. Indexer doc id=2
+POST {{host}}/produits/_doc/2
+Content-Type: application/json
+
+{ "nom": "Clavier mécanique", "prix": 129.00, "stock": 5 }
+
+### 10. Indexer doc auto-id
+POST {{host}}/produits/_doc
+Content-Type: application/json
+
+{ "nom": "Souris sans fil", "prix": 29.90 }
+
+### 11. Refresh manuel
+POST {{host}}/produits/_refresh
+
+### 12. Lire doc 1
+GET {{host}}/produits/_doc/1?pretty
+
+### 13. Update partiel
+POST {{host}}/produits/_update/1
+Content-Type: application/json
+
+{ "doc": { "stock": 8 } }
+
+### 14. Recherche par body
+POST {{host}}/produits/_search?pretty
+Content-Type: application/json
+
+{ "query": { "match": { "nom": "casque" } } }
+
+### 15. Supprimer doc 2
+DELETE {{host}}/produits/_doc/2
+
+### 16. Compter
+GET {{host}}/produits/_count?pretty
+
+### 17. Supprimer l'index
+DELETE {{host}}/produits

@@ -1,0 +1,133 @@
+# Toutes les requêtes du chap 15, prêtes à coller dans Kibana → Dev Tools.
+
+# ===== 1. COMPTAGE EXACT =====
+GET news/_count
+
+GET news/_search
+{ "track_total_hits": true, "size": 0 }
+
+# ===== 2. PRECISION VS RAPPEL (lancer les 3 et comparer) =====
+GET news/_search
+{ "size": 0, "track_total_hits": true,
+  "query": { "match": { "headline": { "query": "obama trump clinton" } } } }
+
+GET news/_search
+{ "size": 0, "track_total_hits": true,
+  "query": { "match": { "headline": { "query": "obama trump clinton", "operator": "and" } } } }
+
+GET news/_search
+{ "size": 0, "track_total_hits": true,
+  "query": { "match": { "headline": { "query": "obama trump clinton", "minimum_should_match": 2 } } } }
+
+# ===== 3. MATCH_PHRASE =====
+GET news/_search
+{ "size": 5, "_source": ["headline","date"],
+  "query": { "match_phrase": { "headline": "President Obama" } } }
+
+# ===== 4. MULTI_MATCH AVEC BOOST =====
+GET news/_search
+{ "size": 5, "_source": ["headline","short_description","authors"],
+  "query": { "multi_match": {
+    "query":  "President Obama",
+    "fields": ["headline^3", "short_description", "authors"] } } }
+
+# ===== 5. FUZZY =====
+GET news/_search
+{ "size": 3, "_source": ["headline"],
+  "query": { "match": { "headline": { "query": "presdent obmaa", "fuzziness": "AUTO" } } } }
+
+# ===== 6. TERM / TERMS / PREFIX (sur .keyword !) =====
+GET news/_search
+{ "query": { "term": { "category.keyword": "POLITICS" } } }
+
+GET news/_search
+{ "query": { "terms": { "category.keyword": ["POLITICS","WORLD NEWS","CRIME"] } } }
+
+GET news/_search
+{ "size": 5, "query": { "prefix": { "authors.keyword": "Mary" } } }
+
+# ===== 7. BOOL COMPLET =====
+GET news/_search
+{ "_source": ["date","category","headline"],
+  "query": { "bool": {
+    "must":   [ { "match": { "headline": "Trump" } } ],
+    "filter": [
+      { "terms": { "category.keyword": ["POLITICS","WORLD NEWS"] } },
+      { "range": { "date": { "gte": "2018-05-01", "lte": "2018-05-31" } } }
+    ],
+    "must_not": [ { "match_phrase": { "short_description": "joke" } } ],
+    "should":   [ { "match": { "short_description": "summit" } } ] } } }
+
+# ===== 8. RANGE SUR DATE =====
+GET news/_search
+{ "size": 0,
+  "query": { "range": { "date": { "gte": "2018-01-01", "lt": "2019-01-01" } } } }
+
+# ===== 9. TRI + SEARCH_AFTER =====
+GET news/_search
+{ "size": 5, "_source": ["date","headline"],
+  "sort": [ { "date": "desc" }, { "_id": "desc" } ] }
+
+# Récupérer la valeur sort du dernier hit puis :
+# GET news/_search
+# { "size": 5, "_source": ["date","headline"],
+#   "sort":         [ { "date": "desc" }, { "_id": "desc" } ],
+#   "search_after": ["2018-05-26", "<ID_DERNIER_HIT>"] }
+
+# ===== 10. HIGHLIGHT =====
+GET news/_search
+{ "size": 3, "_source": ["headline","short_description","date"],
+  "query":   { "match": { "short_description": "North Korea summit" } },
+  "highlight": {
+    "fields":    { "headline": {}, "short_description": {} },
+    "pre_tags":  ["<mark>"],
+    "post_tags": ["</mark>"] } }
+
+# ===== 11. AGGS : top catégories + top_hits =====
+GET news/_search
+{ "size": 0,
+  "aggs": {
+    "by_category": {
+      "terms": { "field": "category.keyword", "size": 10 },
+      "aggs":  { "latest": { "top_hits": { "size": 1, "sort": [{"date":"desc"}],
+                  "_source":["date","headline","authors"] } } } } } }
+
+# ===== 12. DATE_HISTOGRAM + sub-terms =====
+GET news/_search
+{ "size": 0,
+  "aggs": {
+    "per_day": {
+      "date_histogram": { "field": "date", "calendar_interval": "day" },
+      "aggs": { "by_cat": { "terms": { "field": "category.keyword", "size": 5 } } } } } }
+
+# ===== 13. SIGNIFICANT_TEXT =====
+GET news/_search
+{ "size": 0, "query": { "term": { "category.keyword": "POLITICS" } },
+  "aggs":  { "hot_terms": { "significant_text": { "field": "headline", "size": 10 } } } }
+
+# ===== 14. CARDINALITY =====
+GET news/_search
+{ "size": 0,
+  "aggs": { "authors_count": { "cardinality": { "field": "authors.keyword" } } } }
+
+# ===== 15. _UPDATE_BY_QUERY (tout MAJ une catégorie) =====
+POST news/_update_by_query
+{ "script": {
+    "source": "ctx._source.category = ctx._source.category.toUpperCase();",
+    "lang":   "painless" },
+  "query": { "match_all": {} } }
+
+# ===== 16. _REINDEX (vers news_v2) =====
+PUT news_v2
+{ "mappings": { "properties": {
+    "date":     { "type": "date", "format": "yyyy-MM-dd" },
+    "category": { "type": "keyword" },
+    "headline": { "type": "text", "analyzer": "english" },
+    "short_description": { "type": "text", "analyzer": "english" },
+    "authors":  { "type": "keyword" },
+    "link":     { "type": "keyword" } } } }
+
+POST _reindex
+{ "source": { "index": "news" }, "dest": { "index": "news_v2" } }
+
+GET news_v2/_count

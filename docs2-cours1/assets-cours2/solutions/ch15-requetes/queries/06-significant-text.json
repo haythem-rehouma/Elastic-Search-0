@@ -1,0 +1,7 @@
+{
+  "size": 0,
+  "query": { "term": { "category.keyword": "POLITICS" } },
+  "aggs": {
+    "hot_terms": { "significant_text": { "field": "headline", "size": 10 } }
+  }
+}

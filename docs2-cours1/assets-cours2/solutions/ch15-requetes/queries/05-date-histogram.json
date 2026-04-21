@@ -1,0 +1,12 @@
+{
+  "size": 0,
+  "query": { "term": { "category.keyword": "POLITICS" } },
+  "aggs": {
+    "per_day": {
+      "date_histogram": { "field": "date", "calendar_interval": "day" },
+      "aggs": {
+        "by_cat": { "terms": { "field": "category.keyword", "size": 5 } }
+      }
+    }
+  }
+}

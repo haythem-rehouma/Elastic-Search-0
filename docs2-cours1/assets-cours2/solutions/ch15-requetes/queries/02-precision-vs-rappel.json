@@ -1,0 +1,18 @@
+{
+  "comment": "3 variantes pour démontrer précision vs rappel — lancer les 3 et comparer hits.total.value",
+  "OR_default_rappel_max": {
+    "size": 0,
+    "track_total_hits": true,
+    "query": { "match": { "headline": { "query": "obama trump clinton" } } }
+  },
+  "AND_precision_max": {
+    "size": 0,
+    "track_total_hits": true,
+    "query": { "match": { "headline": { "query": "obama trump clinton", "operator": "and" } } }
+  },
+  "minimum_should_match_2_compromis": {
+    "size": 0,
+    "track_total_hits": true,
+    "query": { "match": { "headline": { "query": "obama trump clinton", "minimum_should_match": 2 } } }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "size": 5,
+  "sort":    [ { "date": "desc" } ],
+  "_source": ["date","category","headline"]
+}

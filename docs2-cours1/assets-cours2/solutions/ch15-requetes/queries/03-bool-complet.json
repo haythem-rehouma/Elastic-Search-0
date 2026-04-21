@@ -1,0 +1,14 @@
+{
+  "_source": ["date","category","headline"],
+  "query": {
+    "bool": {
+      "must":   [ { "match": { "headline": "Trump" } } ],
+      "filter": [
+        { "terms": { "category.keyword": ["POLITICS","WORLD NEWS"] } },
+        { "range": { "date": { "gte": "2018-05-01", "lte": "2018-05-31" } } }
+      ],
+      "must_not": [ { "match_phrase": { "short_description": "joke" } } ],
+      "should":   [ { "match": { "short_description": "summit" } } ]
+    }
+  }
+}

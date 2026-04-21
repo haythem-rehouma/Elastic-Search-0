@@ -1,0 +1,30 @@
+# Requêtes ES|QL — à coller dans Kibana → Dev Tools → Console
+# Note : POST _query est l'endpoint ES|QL.
+
+# Q1 : POLITICS
+POST _query
+{ "query": "FROM news | WHERE category == \"POLITICS\" | LIMIT 20" }
+
+# Q2 : Période
+POST _query
+{ "query": "FROM news | WHERE date BETWEEN \"2018-05-20\" AND \"2018-05-31\" | LIMIT 20" }
+
+# Q3 : Plein texte
+POST _query
+{ "query": "FROM news | WHERE MATCH(headline, \"Trump\") OR MATCH(short_description, \"Trump\") | LIMIT 20" }
+
+# Q4 : Combinaison filtres
+POST _query
+{ "query": "FROM news | WHERE (category == \"WORLD NEWS\" OR category == \"POLITICS\") AND MATCH(authors, \"Ron Dicker\") AND date >= \"2018-05-25\" | LIMIT 50" }
+
+# Q5 : Top 10 catégories
+POST _query
+{ "query": "FROM news | STATS count = COUNT(*) BY category | SORT count DESC | LIMIT 10" }
+
+# Q6 : Histogramme par jour (POLITICS)
+POST _query
+{ "query": "FROM news | WHERE category == \"POLITICS\" | EVAL day = DATE_TRUNC(1 days, date) | STATS articles = COUNT(*) BY day | SORT day" }
+
+# Q7 : Top auteurs sur une période
+POST _query
+{ "query": "FROM news | WHERE date BETWEEN \"2018-05-20\" AND \"2018-05-31\" | STATS articles = COUNT(*) BY authors | SORT articles DESC | LIMIT 10" }

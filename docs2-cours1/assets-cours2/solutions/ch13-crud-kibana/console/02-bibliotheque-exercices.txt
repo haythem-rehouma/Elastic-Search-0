@@ -1,0 +1,43 @@
+# Solution complète des exercices d'auto-évaluation (chapitre 13)
+
+# Q1
+DELETE bibliotheque
+PUT bibliotheque
+PUT bibliotheque/_doc/42
+{ "titre": "1984", "auteur": "Orwell" }
+
+# Q2 - Réinsérer le même id avec _create → 409 Conflict
+PUT bibliotheque/_create/42
+{ "titre": "1984", "auteur": "Orwell" }
+
+# Q3 - Ajouter le champ annee SANS écraser le reste
+POST bibliotheque/_update/42
+{ "doc": { "annee": 1949 } }
+
+GET bibliotheque/_doc/42
+# → titre, auteur ET annee tous présents
+
+# Q4 - 3 livres sans id
+POST bibliotheque/_doc
+{ "titre": "Le Petit Prince", "auteur": "Saint-Exupéry" }
+
+POST bibliotheque/_doc
+{ "titre": "Candide", "auteur": "Voltaire" }
+
+POST bibliotheque/_doc
+{ "titre": "Germinal", "auteur": "Zola" }
+
+# Q5
+POST bibliotheque/_refresh
+
+GET bibliotheque/_search
+{ "_source": ["titre","auteur"], "size": 100 }
+
+# Q6
+DELETE bibliotheque/_doc/42
+GET bibliotheque/_doc/42
+# → "found": false
+
+DELETE bibliotheque
+GET bibliotheque
+# → 404 index_not_found_exception

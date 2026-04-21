@@ -1,0 +1,48 @@
+# --- Secrets / variables d'environnement ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Fichiers temporaires Word / Office ---
+~$*
+*.tmp
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Éditeurs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Docker (volumes / runtime) ---
+neo4j/data/
+neo4j/logs/
+neo4j/import/
+neo4j/plugins/*.jar
+elasticsearch-data/
+
+# --- Données générées par les pipelines (chap. 14, 17) ---
+docs2-cours1/assets-cours2/solutions/ch14-bulk-import/data/raw.jsonl
+docs2-cours1/assets-cours2/solutions/ch14-bulk-import/data/news.bulk.ndjson
+docs2-cours1/assets-cours2/solutions/ch14-bulk-import/data/chunks/
+docs2-cours1/assets-cours2/solutions/ch17-labo2/data/
+docs2-cours1/assets-cours2/solutions/ch17-labo2/results/
+docs2-cours1/assets-cours2/solutions/ch11-labo1-elk/backup/
+
+# --- Datasets > 100 MB (limite GitHub sans LFS) ---
+fichiers/spotify_tracks.csv

@@ -1,0 +1,11 @@
+{
+  "size": 0,
+  "aggs": {
+    "per_day": {
+      "date_histogram": { "field": "date", "calendar_interval": "day" },
+      "aggs": {
+        "by_cat": { "terms": { "field": "category.keyword", "size": 5 } }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "size": 5,
+  "sort":    [ { "date": "desc" }, { "_id": "desc" } ],
+  "_source": ["date","headline"]
+}

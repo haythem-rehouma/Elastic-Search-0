@@ -1,0 +1,9 @@
+{
+  "_source": ["headline","authors","date","category"],
+  "query": {
+    "multi_match": {
+      "query":  "President Obama",
+      "fields": ["headline^3", "short_description", "authors"]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+# À copier dans la barre de recherche de Kibana → Discover (mode KQL)
+# http://localhost:5601/app/discover
+
+# Q1 : Articles POLITICS
+category : "POLITICS"
+
+# Q2 : Période donnée
+date >= "2018-05-20" and date < "2018-06-01"
+
+# Q3 : Plein texte simple
+headline : "Trump" or short_description : "Trump"
+
+# Q4 : Combinaison
+category : ("WORLD NEWS" or "POLITICS") and authors : "Ron Dicker" and date >= "2018-05-25"
+
+# Q5 : POLITICS du dernier mois disponible
+category : "WORLD NEWS" and date >= "2018-04-01"

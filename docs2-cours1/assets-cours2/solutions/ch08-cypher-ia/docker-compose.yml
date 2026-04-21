@@ -1,0 +1,27 @@
+name: ch08-cypher-ia
+
+services:
+  neo4j:
+    image: neo4j:5.20-community
+    container_name: ch08-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER}/${NEO4J_PASSWORD}
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: "apoc.*"
+      NEO4J_server_memory_heap_max__size: 1G
+    volumes:
+      - ch08_neo4j_data:/data
+      - ch08_neo4j_logs:/logs
+      - ./cypher:/var/lib/neo4j/import:ro
+    healthcheck:
+      test: ["CMD-SHELL","wget -qO- http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  ch08_neo4j_data:
+  ch08_neo4j_logs:
