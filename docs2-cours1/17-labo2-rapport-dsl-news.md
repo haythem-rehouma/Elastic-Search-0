@@ -470,10 +470,10 @@ POST _reindex
 
 ```mermaid
 flowchart LR
-    A[Pie chart<br/>Top catégories<br/>terms category.keyword] --> D[Dashboard]
-    B[Bar chart<br/>Articles par jour<br/>date_histogram] --> D
-    C[Tag cloud<br/>headline / significant_text] --> D
-    E[Data table<br/>top_hits par catégorie] --> D
+    A["Pie chart<br/>Top categories<br/>terms category.keyword"] --> D["Dashboard"]
+    B["Bar chart<br/>Articles par jour<br/>date_histogram"] --> D
+    C["Tag cloud<br/>headline / significant_text"] --> D
+    E["Data table<br/>top_hits par categorie"] --> D
 ```
 
 4. **Dashboard → Create new** : assembler les 4 visualisations.
@@ -514,3 +514,8 @@ flowchart LR
 > Pour aller plus loin : analyzers FR/EN, suggester `completion`, snapshot/restore, alias d'index. Voir [chapitre 18 — Annexe architectures avancées](./18-annexe-architectures-avancees.md).
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

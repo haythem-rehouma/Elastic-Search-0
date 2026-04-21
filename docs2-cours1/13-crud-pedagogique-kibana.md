@@ -323,3 +323,8 @@ DELETE bibliotheque
 > Une fois ces réflexes acquis, passez au chapitre [14 — Bulk import](./14-import-bulk-dataset.md) pour charger un vrai dataset (~200 000 articles de presse), puis aux requêtes de recherche aux chapitres [15](./15-requetes-elasticsearch-intermediaire.md) et [16](./16-requetes-avancees-kql-esql-dsl.md).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

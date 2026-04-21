@@ -61,13 +61,13 @@ Vous aborderez aussi rapidement **KQL** (langage simple pour Discover) et **ES|Q
 
 ```mermaid
 flowchart TB
-    A[Séance A<br/>Charger 200 853 docs<br/>45 min] --> B[Séance B<br/>Requêtes DSL<br/>90 min]
-    B --> C[Séance C<br/>Labo livrable<br/>90 min]
+    A["Seance A<br/>Charger 200 853 docs<br/>45 min"] --> B["Seance B<br/>Requetes DSL<br/>90 min"]
+    B --> C["Seance C<br/>Labo livrable<br/>90 min"]
     
-    A -.utilise.-> P14[Projet pratique-08-ch14-bulk-import]
-    B -.utilise.-> P15[Projet pratique-09-ch15-requetes]
-    B -.utilise.-> P16[Projet pratique-10-ch16-kql-esql-dsl]
-    C -.utilise.-> P17[Projet labo-2-ch17-labo2]
+    A -.utilise.-> P14["Projet pratique-08-ch14-bulk-import"]
+    B -.utilise.-> P15["Projet pratique-09-ch15-requetes"]
+    B -.utilise.-> P16["Projet pratique-10-ch16-kql-esql-dsl"]
+    C -.utilise.-> P17["Projet labo-2-ch17-labo2"]
 ```
 
 > Les **4 projets runnables** correspondants sont auto-suffisants : un `docker compose up -d` par projet, pas de configuration partagée à gérer.
@@ -369,3 +369,8 @@ Vous tentez de modifier un mapping après création (interdit). Solution : crée
 > **Vous n'avez pas encore fait la Pratique 1 ?** Commencer par : [`GUIDE-PRATIQUE-1.md`](./GUIDE-PRATIQUE-1.md).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

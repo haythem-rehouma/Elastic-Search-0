@@ -224,3 +224,8 @@ Tous les blocs `cypher` sont compatibles **Neo4j 5.x** (sauf mention contraire).
 Les requêtes Elasticsearch ciblent **Elasticsearch 8.x**.
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -93,3 +93,8 @@ Vous voyez la console divisée en deux : à gauche les requêtes, à droite les 
 - Annexe Docker Desktop par OS : [chap. 06 §A](../../06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

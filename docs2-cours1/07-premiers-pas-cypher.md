@@ -182,3 +182,8 @@ MATCH ()-[r]->() RETURN count(r) AS rels;
 > On verra dans le [chapitre 09](./09-nettoyage-neo4j.md) comment **nettoyer** une base avant de recharger.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

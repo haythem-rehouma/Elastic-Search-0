@@ -53,3 +53,8 @@ labo-1-ch11-elk/
 [`../labo-1-solutions-elk.md`](../labo-1-solutions-elk.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

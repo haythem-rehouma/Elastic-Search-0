@@ -29,13 +29,12 @@ Cours complet sur **Elasticsearch & Kibana** (théorie + pratiques + projets run
 
 ```mermaid
 flowchart LR
-    A[Cloner le depot] --> B[Lire docs2-cours1/README.md]
-    B --> C{Quelle pratique ?}
-    C -->|Pratique 1| D[GUIDE-PRATIQUE-1.md<br/>CRUD Kibana]
-    C -->|Pratique 2| E[GUIDE-PRATIQUE-2.md<br/>Search/DSL/Labo 2]
-    D --> F[Projet runnable<br/>ch13-crud-kibana/]
-    E --> G[Projets runnables<br/>ch14, ch15, ch16, ch17]
-    F --> H[docker compose up -d]
+    B["Lire docs2-cours1/README.md"] --> C{"Quelle pratique ?"}
+    C -->|"Pratique 7 (CRUD)"| D["GUIDE-PRATIQUE-1.md<br/>CRUD Kibana"]
+    C -->|"Labo 2 (DSL)"| E["GUIDE-PRATIQUE-2.md<br/>Search / DSL / Labo 2"]
+    D --> F["Projet runnable<br/>pratique-07-ch13-crud-kibana/"]
+    E --> G["Projets runnables<br/>pratique-08, 09, 10 + labo-2"]
+    F --> H["docker compose up -d"]
     G --> H
 ```
 
@@ -112,3 +111,8 @@ Ce dépôt est dérivé de `elasticsearch-1` ; les éléments suivants ont été
 Les compose files **par chapitre** restent disponibles dans `docs2-cours1/assets-cours2/solutions/chXX-*/`. Chaque projet runnable est autonome.
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -274,14 +274,14 @@ Réponse : **document 1** uniquement, car c'est le seul à contenir les deux mot
 
 ```mermaid
 flowchart LR
-    Q[Requete<br/>chat noir] --> Split[Decoupage en mots]
-    Split --> A[Lookup &quot;chat&quot;<br/>dans le dictionnaire]
-    Split --> B[Lookup &quot;noir&quot;<br/>dans le dictionnaire]
-    A --> LA[Liste 1, 2]
-    B --> LB[Liste 1, 3]
-    LA --> Inter[Intersection]
+    Q["Requete : chat noir"] --> Split["Decoupage en mots"]
+    Split --> A["Lookup chat<br/>dans le dictionnaire"]
+    Split --> B["Lookup noir<br/>dans le dictionnaire"]
+    A --> LA["Liste 1, 2"]
+    B --> LB["Liste 1, 3"]
+    LA --> Inter["Intersection"]
     LB --> Inter
-    Inter --> R[Resultat : doc 1]
+    Inter --> R["Resultat : doc 1"]
 ```
 
 ### Les trois confusions classiques
@@ -611,3 +611,8 @@ mindmap
 ```
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

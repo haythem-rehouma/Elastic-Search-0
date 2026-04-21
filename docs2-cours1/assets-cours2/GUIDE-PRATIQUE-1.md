@@ -62,11 +62,11 @@ Maîtriser les **opérations CRUD** (Create, Read, Update, Delete) sur des docum
 
 ```mermaid
 flowchart LR
-    A[1. Démarrer la stack<br/>5 min] --> B[2. POST vs PUT vs _create<br/>20 min]
-    B --> C[3. Update partiel<br/>15 min]
-    C --> D[4. Piège PUT _doc<br/>15 min]
-    D --> E[5. DELETE doc + index<br/>10 min]
-    E --> F[6. Exercice à rendre<br/>25 min]
+    A["1. Demarrer la stack<br/>5 min"] --> B["2. POST vs PUT vs _create<br/>20 min"]
+    B --> C["3. Update partiel<br/>15 min"]
+    C --> D["4. Piege PUT _doc<br/>15 min"]
+    D --> E["5. DELETE doc + index<br/>10 min"]
+    E --> F["6. Exercice a rendre<br/>25 min"]
 ```
 
 ---
@@ -349,3 +349,8 @@ Pas de panique : tout est local et reproductible. Recréez l'index, réinsérez 
 > **Vous avez fini la Pratique 1 ?** Enchaînez avec le [**Guide Pratique 2**](./GUIDE-PRATIQUE-2.md) (Search API + DSL).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

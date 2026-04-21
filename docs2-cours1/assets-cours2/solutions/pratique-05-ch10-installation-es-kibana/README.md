@@ -66,3 +66,8 @@ docker compose down -v
 Labo 1 — [`labo-1-ch11-elk/`](../labo-1-ch11-elk/)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

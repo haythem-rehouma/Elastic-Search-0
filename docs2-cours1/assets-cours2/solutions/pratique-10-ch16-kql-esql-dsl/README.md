@@ -39,3 +39,8 @@ docker compose up -d
 [`../pratique-10-solutions-kql-esql-dsl.md`](../pratique-10-solutions-kql-esql-dsl.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

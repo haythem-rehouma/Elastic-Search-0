@@ -37,14 +37,14 @@ Les deux sont **complémentaires**. Exemple : Spotify-like.
 
 ```mermaid
 flowchart LR
-    CSV[(CSV Spotify<br/>~102k tracks)] -->|APOC LOAD| N4J[(Neo4j<br/>graphe)]
-    N4J -->|sync_to_elasticsearch.py| ES[(Elasticsearch)]
-    ES --> KIB[Kibana]
-    N4J --> JUP[Jupyter Lab]
-    JUP --> VIZ[pyvis / plotly]
-    User((Étudiant)) --> JUP
+    CSV[("CSV Spotify<br/>~102k tracks")] -->|APOC LOAD| N4J[("Neo4j<br/>graphe")]
+    N4J -->|sync_to_elasticsearch.py| ES[("Elasticsearch")]
+    ES --> KIB["Kibana"]
+    N4J --> JUP["Jupyter Lab"]
+    JUP --> VIZ["pyvis / plotly"]
+    User(("Etudiant")) --> JUP
     User --> KIB
-    User --> NEOBROW[Neo4j Browser]
+    User --> NEOBROW["Neo4j Browser"]
 ```
 
 ---
@@ -155,3 +155,8 @@ helpers.streaming_bulk(es, stream_tracks(session), chunk_size=500)
 | 3     | UI    | Affiche le top 20 trié                         |
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -351,3 +351,8 @@ Invoke-RestMethod -Uri 'http://localhost:9200/produits/_doc/1'
 | `409 version_conflict_engine_exception`       | Update concurrent / `_create` sur id existant          | Utiliser `_doc/<id>` (overwrite) ou retry                               |
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

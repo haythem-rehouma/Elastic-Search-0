@@ -210,3 +210,8 @@ curl -s "http://localhost:9200/produits/_search?pretty" -H 'Content-Type: applic
 | Refresh manuel            | `POST /<index>/_refresh`                                       |
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

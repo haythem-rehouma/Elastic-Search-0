@@ -542,3 +542,8 @@ GET news_v2/_count
 → Si ces requêtes vous parlent, vous êtes prêt pour le [chapitre 16](../../16-requetes-avancees-kql-esql-dsl.md) (KQL vs ES|QL vs DSL) et le [Labo 2](./labo-2-solutions-rapport-dsl-news.md).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

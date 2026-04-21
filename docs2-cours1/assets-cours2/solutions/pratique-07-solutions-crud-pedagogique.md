@@ -355,3 +355,8 @@ GET _cat/indices?v
 → Si vous savez répondre à toutes ces questions, vous êtes prêt pour le [chapitre 14 : Bulk import](../../14-import-bulk-dataset.md).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

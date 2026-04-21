@@ -367,3 +367,8 @@ docker volume ls | grep elk_esdata
 > Pour aller plus loin : passez au [Setup A à Z](./00-setup-complet-a-z.md) qui ajoute Neo4j + Jupyter, puis au [chapitre 14](../../14-import-bulk-dataset.md) pour charger un vrai dataset.
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

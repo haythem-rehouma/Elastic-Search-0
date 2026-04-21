@@ -623,15 +623,15 @@ Une fois la stack opérationnelle, suivez les chapitres dans cet ordre **pédago
 
 ```mermaid
 flowchart TB
-    A[Setup A-Z<br/>ce document] --> B[Ch. 1-3<br/>Théorie ES]
-    B --> C[Ch. 4-5<br/>Architectures]
-    C --> D[Ch. 6-9<br/>Neo4j + Cypher]
-    D --> E[Ch. 10-11<br/>Install + Labo 1 ELK]
-    E --> F[Ch. 12-13<br/>Commandes ES + CRUD]
-    F --> G[Ch. 14<br/>Bulk import]
-    G --> H[Ch. 15-16<br/>Requêtes DSL/KQL/ES-QL]
-    H --> I[Ch. 17<br/>Labo 2 News]
-    I --> J[Ch. 18<br/>Architectures avancées]
+    A["Setup A-Z<br/>ce document"] --> B["Ch. 1-3<br/>Theorie ES"]
+    B --> C["Ch. 4-5<br/>Architectures"]
+    C --> D["Ch. 6-9<br/>Neo4j + Cypher"]
+    D --> E["Ch. 10-11<br/>Install + Labo 1 ELK"]
+    E --> F["Ch. 12-13<br/>Commandes ES + CRUD"]
+    F --> G["Ch. 14<br/>Bulk import"]
+    G --> H["Ch. 15-16<br/>Requetes DSL/KQL/ES-QL"]
+    H --> I["Ch. 17<br/>Labo 2 News"]
+    I --> J["Ch. 18<br/>Architectures avancees"]
 ```
 
 | Pour faire…                                       | Allez à                                                    |
@@ -646,3 +646,8 @@ flowchart TB
 | Le labo 2 News (livrable)                         | Solutions [chapitre 17](./labo-2-solutions-rapport-dsl-news.md)           |
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

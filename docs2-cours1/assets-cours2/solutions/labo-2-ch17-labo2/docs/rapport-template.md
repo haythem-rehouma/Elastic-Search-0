@@ -88,3 +88,8 @@ suffit à recréer toute l'infrastructure et l'index, à partir d'un poste vierg
 Les 10 requêtes couvrent tous les patterns DSL essentiels : **tri**, **filtres bool**, **boost**, **agrégations imbriquées**, **highlight**, **search_after**.
 
 Prochaines étapes : analyzers FR/EN, `completion suggester` (autocomplétion), snapshot/restore, alias d'index.
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

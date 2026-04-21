@@ -463,3 +463,8 @@ Get-ChildItem "$chunkDir\part_*.ndjson" | ForEach-Object {
 > **Conseil** : sur Windows, l'expérience est nettement meilleure dans **WSL Ubuntu** (toutes les commandes Linux ci-dessus marchent telles quelles).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

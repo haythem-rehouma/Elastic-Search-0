@@ -51,3 +51,8 @@ bash run-query.sh 02-precision-vs-rappel.json
 [`../pratique-09-solutions-requetes-intermediaires.md`](../pratique-09-solutions-requetes-intermediaires.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

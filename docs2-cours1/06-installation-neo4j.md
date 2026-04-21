@@ -589,3 +589,8 @@ Tuer le process qui occupe le port, ou changer le mapping dans le `docker-compos
 </details>
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

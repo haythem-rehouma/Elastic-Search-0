@@ -459,15 +459,15 @@ GET news/_search
 
 ```mermaid
 flowchart TD
-    A[Question utilisateur] --> Q1{Filtre/exploration<br/>interactive ?}
-    Q1 -->|Oui, dans Discover| KQL[KQL]
-    Q1 -->|Non| Q2{Rapport tabulaire<br/>style SQL ?}
-    Q2 -->|Oui| ESQL[ES-QL]
-    Q2 -->|Non| Q3{Boost, highlight,<br/>scoring custom ?}
-    Q3 -->|Oui| DSL1[Query DSL]
-    Q3 -->|Non| Q4{Embarqué dans une app<br/>Python/Node/Java ?}
-    Q4 -->|Oui| DSL2[Query DSL via client]
-    Q4 -->|Non| ESQL2[ES-QL ou DSL au choix]
+    A["Question utilisateur"] --> Q1{"Filtre/exploration<br/>interactive ?"}
+    Q1 -->|"Oui, dans Discover"| KQL["KQL"]
+    Q1 -->|Non| Q2{"Rapport tabulaire<br/>style SQL ?"}
+    Q2 -->|Oui| ESQL["ES-QL"]
+    Q2 -->|Non| Q3{"Boost, highlight,<br/>scoring custom ?"}
+    Q3 -->|Oui| DSL1["Query DSL"]
+    Q3 -->|Non| Q4{"Embarque dans une app<br/>Python/Node/Java ?"}
+    Q4 -->|Oui| DSL2["Query DSL via client"]
+    Q4 -->|Non| ESQL2["ES-QL ou DSL au choix"]
 ```
 
 | Critère                                | Recommandation               |
@@ -482,3 +482,8 @@ flowchart TD
 > **Recommandation pour le Labo 2** ([chapitre 17](./labo-2-solutions-rapport-dsl-news.md)) : on utilise **uniquement le DSL** pour bien le maîtriser.
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

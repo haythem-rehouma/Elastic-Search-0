@@ -81,3 +81,8 @@ rm -rf data/news.bulk.ndjson data/chunks # nettoyer les fichiers générés
 [`../pratique-08-solutions-bulk-import.md`](../pratique-08-solutions-bulk-import.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

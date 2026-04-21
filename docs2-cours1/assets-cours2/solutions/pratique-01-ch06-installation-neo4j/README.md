@@ -59,3 +59,8 @@ docker compose down -v
 Pratique 2 — [`pratique-02-ch07-premiers-pas-cypher/`](../pratique-02-ch07-premiers-pas-cypher/)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

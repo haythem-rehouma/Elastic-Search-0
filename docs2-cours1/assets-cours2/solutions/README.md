@@ -20,14 +20,14 @@
 
 ```mermaid
 flowchart TB
-    S00[00 - Setup A-Z<br/>Docker + compose + stack] --> S08[08 - Cypher cas IA]
-    S00 --> S11[11 - Labo 1 ELK]
-    S11 --> S12[12 - Commandes ES base]
-    S12 --> S13[13 - CRUD Kibana Dev Tools]
-    S13 --> S14[14 - Bulk import 200853 docs]
-    S14 --> S15[15 - Requêtes DSL intermédiaires]
-    S15 --> S16[16 - KQL vs ES-QL vs DSL]
-    S16 --> S17[17 - Labo 2 livrable News]
+    S00["00 - Setup A-Z<br/>Docker + compose + stack"] --> S08["P3 - 08 - Cypher cas IA"]
+    S00 --> S11["Labo 1 - 11 - ELK"]
+    S11 --> S12["P6 - 12 - Commandes ES base"]
+    S12 --> S13["P7 - 13 - CRUD Kibana Dev Tools"]
+    S13 --> S14["P8 - 14 - Bulk import 200 853 docs"]
+    S14 --> S15["P9 - 15 - Requetes DSL intermediaires"]
+    S15 --> S16["P10 - 16 - KQL vs ES-QL vs DSL"]
+    S16 --> S17["Labo 2 - 17 - livrable News"]
 ```
 
 > **Compter ~6 à 10 heures** pour parcourir l'ensemble la première fois.
@@ -157,3 +157,8 @@ Chaque solution commence par un **§ 0 Vérifications** (pré-flight). N'avancez
 | Aggrégation vide sur `category`       | Cibler `category.keyword` — voir [Solutions chap. 15 § 7](./pratique-09-solutions-requetes-intermediaires.md#7-recherches-exactes-term-terms-prefix) |
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

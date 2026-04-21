@@ -39,23 +39,23 @@ Sans bus d'événements, chaque producteur (mobile, web, capteurs IoT) doit conn
 ```mermaid
 flowchart LR
     subgraph Producers
-      A1[App mobile]
-      A2[App web]
-      A3[Capteurs IoT]
-      A4[Bases SQL CDC]
+      A1["App mobile"]
+      A2["App web"]
+      A3["Capteurs IoT"]
+      A4["Bases SQL CDC"]
     end
 
-    A1 & A2 & A3 & A4 --> K[(Kafka<br/>topics: events,<br/>orders, logs, ...)]
+    A1 & A2 & A3 & A4 --> K[("Kafka<br/>topics: events,<br/>orders, logs, ...")]
 
-    K --> S1[Logstash / Filebeat]
-    K --> S2[Service ML]
-    K --> S3[Spark / Flink]
-    K --> S4[Data warehouse]
+    K --> S1["Logstash / Filebeat"]
+    K --> S2["Service ML"]
+    K --> S3["Spark / Flink"]
+    K --> S4["Data warehouse"]
 
-    S1 --> ES[(Elasticsearch)]
+    S1 --> ES[("Elasticsearch")]
     S2 --> ES
     S3 --> ES
-    ES --> KB[Kibana]
+    ES --> KB["Kibana"]
 ```
 
 ### 1.3 Vocabulaire express
@@ -86,17 +86,17 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Tx[Transactions<br/>cartes bancaires] -->|Kafka topic: tx| F[Service ML<br/>scoring fraude]
-    F -->|Kafka topic: tx_scored| L[Logstash]
-    L --> ES[(Elasticsearch<br/>index: tx-YYYY.MM.DD)]
-    ES --> KB[Kibana<br/>dashboards SOC]
+    Tx["Transactions<br/>cartes bancaires"] -->|"Kafka topic: tx"| F["Service ML<br/>scoring fraude"]
+    F -->|"Kafka topic: tx_scored"| L["Logstash"]
+    L --> ES[("Elasticsearch<br/>index: tx-YYYY.MM.DD")]
+    ES --> KB["Kibana<br/>dashboards SOC"]
 
-    F --> AL[Service Alerting]
-    AL --> SMS[SMS / Email / Slack]
+    F --> AL["Service Alerting"]
+    AL --> SMS["SMS / Email / Slack"]
 
-    subgraph Training pipeline
-      DW[Data Warehouse] --> M[Notebook / MLOps]
-      M --> R[Modèle exporté<br/>ONNX / Pickle]
+    subgraph Training_pipeline ["Training pipeline"]
+      DW["Data Warehouse"] --> M["Notebook / MLOps"]
+      M --> R["Modele exporte<br/>ONNX / Pickle"]
       R --> F
     end
 ```
@@ -145,14 +145,14 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    CAM[Caméras IP] -->|RTSP| ING[Ingest service<br/>FFmpeg + OpenCV]
-    ING -->|frames + métadonnées| K[(Kafka)]
-    K --> CV[Service CV<br/>YOLO / Detectron2 / TF]
-    CV -->|détections JSON| K2[(Kafka topic: detections)]
-    K2 --> ES[(Elasticsearch)]
-    ES --> KB[Kibana<br/>+ image preview]
+    CAM["Cameras IP"] -->|RTSP| ING["Ingest service<br/>FFmpeg + OpenCV"]
+    ING -->|"frames + metadonnees"| K[("Kafka")]
+    K --> CV["Service CV<br/>YOLO / Detectron2 / TF"]
+    CV -->|"detections JSON"| K2[("Kafka topic: detections")]
+    K2 --> ES[("Elasticsearch")]
+    ES --> KB["Kibana<br/>+ image preview"]
 
-    CV -->|images annotées| OBJ[(MinIO / S3)]
+    CV -->|"images annotees"| OBJ[("MinIO / S3")]
     OBJ -.lien.-> ES
 ```
 
@@ -204,9 +204,9 @@ Avantages : pas de gros index unique, rotation automatique, suppression facile.
 
 ```mermaid
 flowchart LR
-    HOT[Hot tier<br/>SSD, requêtes fréquentes] --> WARM[Warm tier<br/>HDD, requêtes occasionnelles]
-    WARM --> COLD[Cold tier<br/>S3, archives]
-    COLD --> FROZEN[Frozen tier<br/>searchable snapshots]
+    HOT["Hot tier<br/>SSD, requetes frequentes"] --> WARM["Warm tier<br/>HDD, requetes occasionnelles"]
+    WARM --> COLD["Cold tier<br/>S3, archives"]
+    COLD --> FROZEN["Frozen tier<br/>searchable snapshots"]
 ```
 
 ### 4.3 Cross-cluster search
@@ -258,3 +258,8 @@ PUT _ingest/pipeline/anonymize
 > **Fin du cours.** Vous avez maintenant une vue complète : théorie ELK ([01-03](./01-introduction-elasticsearch-elk-stack.md)), architectures ([04-05](./04-architecture-pipeline-elk-neo4j.md)), bases Neo4j ([06-09](./06-installation-neo4j.md)), installation et exploration d'Elasticsearch ([10-16](./10-installation-elasticsearch-kibana.md)), et deux laboratoires ([11](./11-labo1-mise-en-place-elk.md), [17](./17-labo2-rapport-dsl-news.md)).
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -336,3 +336,8 @@ MATCH ()-[r]->() RETURN type(r) AS rel_type, count(r) AS nb;
 → Si vous obtenez ces chiffres, **le cas pratique est réussi**.
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

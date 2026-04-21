@@ -439,10 +439,10 @@ Menu → **Visualize Library → Create visualization → Lens**.
 
 ```mermaid
 flowchart LR
-    A[Pie chart<br/>Top catégories<br/>terms category.keyword] --> D[Dashboard]
-    B[Bar chart vertical<br/>Articles par jour<br/>date_histogram] --> D
-    C[Tag cloud<br/>headline / significant_text] --> D
-    E[Data table<br/>top auteurs + dernier article] --> D
+    A["Pie chart<br/>Top categories<br/>terms category.keyword"] --> D["Dashboard"]
+    B["Bar chart vertical<br/>Articles par jour<br/>date_histogram"] --> D
+    C["Tag cloud<br/>headline / significant_text"] --> D
+    E["Data table<br/>top auteurs + dernier article"] --> D
 ```
 
 | # | Visualisation              | Type        | Buckets / champs                                                |
@@ -564,3 +564,8 @@ Décisions clés :
 > **Pour aller plus loin** : analyzers FR/EN, suggester `completion`, snapshot/restore, alias d'index — voir [chap. 18](../../18-annexe-architectures-avancees.md).
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

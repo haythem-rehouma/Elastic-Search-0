@@ -58,3 +58,8 @@ bash scripts/verify.sh    # ou .\scripts\verify.ps1
 - Pratique suivante : [`pratique-02-solutions-premiers-pas-cypher.md`](./pratique-02-solutions-premiers-pas-cypher.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

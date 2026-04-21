@@ -86,9 +86,9 @@ Avant d'écrire des requêtes, il faut comprendre le **compromis universel** de 
 
 ```mermaid
 flowchart LR
-    A[Requête trop large<br/>OR par défaut] -->|"Beaucoup de résultats<br/>mais peu pertinents"| R[Rappel haut<br/>Précision basse]
-    B[Requête trop stricte<br/>match_phrase + filter] -->|"Peu de résultats<br/>mais très pertinents"| P[Précision haute<br/>Rappel bas]
-    C[minimum_should_match<br/>operator and<br/>per-field boost] -->|"Équilibre"| E[Compromis ajusté]
+    A["Requete trop large<br/>OR par defaut"] -->|"Beaucoup de resultats<br/>mais peu pertinents"| R["Rappel haut<br/>Precision basse"]
+    B["Requete trop stricte<br/>match_phrase + filter"] -->|"Peu de resultats<br/>mais tres pertinents"| P["Precision haute<br/>Rappel bas"]
+    C["minimum_should_match<br/>operator and<br/>per-field boost"] -->|"Equilibre"| E["Compromis ajuste"]
 ```
 
 | Cas d'usage                                  | Préférer…                                       |
@@ -464,3 +464,8 @@ curl -X POST 'http://localhost:9200/news/_refresh'
 | Changer de mapping                | `_reindex`                                         |
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

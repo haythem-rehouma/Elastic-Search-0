@@ -48,3 +48,8 @@ docker compose down -v
 [`../pratique-06-solutions-commandes-base.md`](../pratique-06-solutions-commandes-base.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -82,3 +82,8 @@ rm -rf data/news.bulk.ndjson data/chunks results
 [`../labo-2-solutions-rapport-dsl-news.md`](../labo-2-solutions-rapport-dsl-news.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -115,3 +115,8 @@ Capturer la relation dans `r` permet de lire ses propriétés (`r.depuis`).
 - Documentation Cypher officielle : https://neo4j.com/docs/cypher-manual/current/
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -276,3 +276,8 @@ curl -s -H 'Content-Type: application/x-ndjson' \
 8. **Snapshot** une fois le corpus chargé.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

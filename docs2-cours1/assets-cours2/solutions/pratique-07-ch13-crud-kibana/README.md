@@ -39,3 +39,8 @@ docker compose down -v
 [`../pratique-07-solutions-crud-pedagogique.md`](../pratique-07-solutions-crud-pedagogique.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

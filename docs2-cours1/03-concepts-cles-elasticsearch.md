@@ -21,9 +21,9 @@
 ```mermaid
 flowchart TB
     subgraph Cluster
-      N1[Nœud 1]
-      N2[Nœud 2]
-      N3[Nœud 3]
+      N1["Noeud 1"]
+      N2["Noeud 2"]
+      N3["Noeud 3"]
     end
     N1 --- N2 --- N3
 ```
@@ -151,9 +151,9 @@ Quand un champ est `text`, Elasticsearch passe la valeur dans un **analyseur** :
 
 ```mermaid
 flowchart LR
-    A["L'IA, c'est génial !"] --> B[char_filter]
-    B --> C[tokenizer]
-    C --> D[token_filters<br/>lowercase / stop / stem]
+    A["L'IA, c'est genial !"] --> B["char_filter"]
+    B --> C["tokenizer"]
+    C --> D["token_filters<br/>lowercase / stop / stem"]
     D --> E["[ia, c, est, genial]"]
 ```
 
@@ -202,7 +202,7 @@ sequenceDiagram
     Client->>ES: GET /produits/_search?q=casque
     ES->>Lucene: Recherche dans les segments
     Lucene-->>ES: Liste de doc + scores
-    ES-->>Client: JSON résultats
+    ES-->>Client: JSON resultats
 ```
 
 | Étape          | Description                                                       |
@@ -213,3 +213,8 @@ sequenceDiagram
 | **Delete**     | Le doc est marqué supprimé, vraiment effacé au prochain merge.    |
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

@@ -112,3 +112,8 @@ docker exec -i p04_neo4j cypher-shell -u neo4j -p 'Neo4jStrongPass!' < cypher/30
 - Pratique suivante : [`pratique-05-solutions-installation-es-kibana.md`](./pratique-05-solutions-installation-es-kibana.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

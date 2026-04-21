@@ -194,3 +194,8 @@ CALL apoc.schema.assert({},{});
 | Tout nettoyer (schéma)                  | `CALL apoc.schema.assert({},{});`                                       |
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

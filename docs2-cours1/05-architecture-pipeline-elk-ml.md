@@ -38,16 +38,16 @@ On greffe donc un **module ML** (souvent Python : scikit-learn, PyTorch, TensorF
 ```mermaid
 flowchart LR
     subgraph Sources
-        S1[API]
-        S2[CSV / Logs]
-        S3[Capteurs IoT]
+        S1["API"]
+        S2["CSV / Logs"]
+        S3["Capteurs IoT"]
     end
-    Sources --> Beats[Beats / Filebeat]
-    Beats --> LS[Logstash<br/>parse + enrichit]
-    LS --> ES[(Elasticsearch)]
-    ES --> KIB[Kibana<br/>dashboards]
-    ES --> ML[Service ML<br/>Python / FastAPI]
-    ML -->|prédiction| ES
+    Sources --> Beats["Beats / Filebeat"]
+    Beats --> LS["Logstash<br/>parse + enrichit"]
+    LS --> ES[("Elasticsearch")]
+    ES --> KIB["Kibana<br/>dashboards"]
+    ES --> ML["Service ML<br/>Python / FastAPI"]
+    ML -->|prediction| ES
     ML -->|alerte| KIB
 ```
 
@@ -113,8 +113,8 @@ Trois grandes manières d'intégrer du ML avec ES :
 
 ```mermaid
 flowchart LR
-    A[Doc brut] --> B{Pipeline ingest}
-    B -->|inference processor| ES[(Index final<br/>+ ml.prediction)]
+    A["Doc brut"] --> B{"Pipeline ingest"}
+    B -->|inference processor| ES[("Index final<br/>+ ml.prediction")]
 ```
 
 ---
@@ -123,13 +123,13 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    A[Données brutes] --> B[Logstash / Beats]
-    B --> C[(ES : index 'raw')]
-    C --> D[Service ML inference]
-    D --> E[(ES : index 'predicted')]
-    E --> F[Kibana : dashboard + alertes]
-    F --> G[Humain : feedback / labels]
-    G --> H[Re-training pipeline]
+    A["Donnees brutes"] --> B["Logstash / Beats"]
+    B --> C[("ES : index raw")]
+    C --> D["Service ML inference"]
+    D --> E[("ES : index predicted")]
+    E --> F["Kibana : dashboard + alertes"]
+    F --> G["Humain : feedback / labels"]
+    G --> H["Re-training pipeline"]
     H --> D
 ```
 
@@ -146,3 +146,8 @@ flowchart TB
 > Pour notre cours, on **n'implémente pas** une vraie boucle ML : on se concentre sur le côté Elasticsearch + Neo4j. Mais il faut **comprendre l'écosystème**.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

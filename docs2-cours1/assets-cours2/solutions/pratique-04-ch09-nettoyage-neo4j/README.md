@@ -70,3 +70,8 @@ docker compose down -v
 Pratique 5 — [`pratique-05-ch10-installation-es-kibana/`](../pratique-05-ch10-installation-es-kibana/)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

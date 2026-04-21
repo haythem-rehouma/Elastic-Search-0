@@ -260,3 +260,8 @@ GET news/_search
 > Dans le **Labo 2** ([chapitre 17](./17-labo2-rapport-dsl-news.md)), on n'utilisera **que** le Query DSL pour bien le maîtriser.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

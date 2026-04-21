@@ -38,18 +38,18 @@ Construire et interroger un mini-graphe représentant un **programme universitai
 
 ```mermaid
 flowchart LR
-    P1((John Smith)) -->|ENSEIGNER| C1[420-AI01-RO]
-    P2((Emily Johnson)) -->|ENSEIGNER 45h| C2[420-AI02-RO]
-    P3((Michael Williams)) -->|ENSEIGNER| C3[420-AI03-RO]
-    P4((Sarah Brown)) -->|ENSEIGNER| C4[420-AI04-RO]
-    P5((Haythem Rehouma)) -->|ENSEIGNER 60h| C5[420-AI05-RO]
+    P1(("John Smith")) -->|ENSEIGNER| C1["420-AI01-RO"]
+    P2(("Emily Johnson")) -->|"ENSEIGNER 45h"| C2["420-AI02-RO"]
+    P3(("Michael Williams")) -->|ENSEIGNER| C3["420-AI03-RO"]
+    P4(("Sarah Brown")) -->|ENSEIGNER| C4["420-AI04-RO"]
+    P5(("Haythem Rehouma")) -->|"ENSEIGNER 60h"| C5["420-AI05-RO"]
 
     C5 -->|PREALABLE| C1
-    C6[420-AI06-RO] -->|PREALABLE| C2 -->|PREALABLE| C3
+    C6["420-AI06-RO"] -->|PREALABLE| C2 -->|PREALABLE| C3
 
-    P5 ---|COLLEGUES IA| P1
-    P2 ---|COLLEGUES IA| P4
-    P3 ---|COLLEGUES IA| P4
+    P5 ---|"COLLEGUES IA"| P1
+    P2 ---|"COLLEGUES IA"| P4
+    P3 ---|"COLLEGUES IA"| P4
 ```
 
 | Label        | Propriétés clés                            |
@@ -236,3 +236,8 @@ MATCH (a)-[r]->(b) RETURN a, r, b;
 → Cliquer sur un nœud dans le browser pour voir ses voisins.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*

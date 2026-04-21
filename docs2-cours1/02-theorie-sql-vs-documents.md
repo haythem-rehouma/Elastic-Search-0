@@ -125,3 +125,8 @@ Il faut mettre à jour **tous les documents** qui le mentionnent. C'est le **pri
 > Dans ce cours on combine **Neo4j (graphe) + Elasticsearch (recherche)** : chacun fait ce qu'il fait le mieux.
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+
+---
+
+*Copyright © Haythem R - Tous droits reserves.*
