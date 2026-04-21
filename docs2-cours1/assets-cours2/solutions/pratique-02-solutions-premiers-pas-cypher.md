@@ -2,7 +2,7 @@
 
 # Pratique 2 — Solutions : Premiers pas en Cypher (chap. 07)
 
-> Cible : [chapitre 07](../07-premiers-pas-cypher.md) · Projet runnable : [`pratique-02-ch07-premiers-pas-cypher/`](./pratique-02-ch07-premiers-pas-cypher/)
+> Cible : [chapitre 07](../../07-premiers-pas-cypher.md) · Projet runnable : [`pratique-02-ch07-premiers-pas-cypher/`](./pratique-02-ch07-premiers-pas-cypher/)
 
 ## Objectif
 

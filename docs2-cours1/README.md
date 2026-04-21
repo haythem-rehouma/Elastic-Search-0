@@ -39,6 +39,91 @@ Ce dossier rassemble l'intégralité du cours, réorganisé en **18 chapitres ch
 | 17  | [**Labo 2** — Rapport DSL sur l'index `news`](./17-labo2-rapport-dsl-news.md)               | Laboratoire  | **Labo 2** — [guide étudiant](./assets-cours2/GUIDE-PRATIQUE-2.md) |
 | 18  | [Annexe — Architectures avancées (Kafka, ML, Computer Vision)](./18-annexe-architectures-avancees.md) | Annexe | —                |
 
+### Liste de suivi (checklist étudiant)
+
+> **Mode d'emploi** : remplacez `[ ]` par `[x]` dans la colonne **Done** au fur et à mesure que vous terminez chaque chapitre / pratique / labo. Sur GitHub, vous pouvez aussi utiliser le bouton **Edit** (icône crayon) pour cocher directement en ligne.
+>
+> **Objectif global** : 18/18 cases cochées = cours terminé.
+
+| Done  | #  | Catégorie     | Titre                                                                                       | Effort estimé | Livrable               |
+| :---: | -: | ------------- | ------------------------------------------------------------------------------------------- | :-----------: | ---------------------- |
+| `[ ]` | 01 | Théorie       | [Introduction à Elasticsearch & ELK Stack](./01-introduction-elasticsearch-elk-stack.md)    | 1 h           | Lecture                |
+| `[ ]` | 02 | Théorie       | [SQL vs Documents (Elasticsearch)](./02-theorie-sql-vs-documents.md)                        | 45 min        | Lecture                |
+| `[ ]` | 03 | Théorie       | [Concepts clés : cluster, shards, mapping, types](./03-concepts-cles-elasticsearch.md)      | 1 h           | Lecture                |
+| `[ ]` | 04 | Architecture  | [Pipeline ELK + Neo4j](./04-architecture-pipeline-elk-neo4j.md)                             | 30 min        | Lecture                |
+| `[ ]` | 05 | Architecture  | [Pipeline ELK + Machine Learning](./05-architecture-pipeline-elk-ml.md)                     | 30 min        | Lecture                |
+| `[ ]` | 06 | **Pratique 1** | [Installation de Neo4j + APOC dans Docker](./06-installation-neo4j.md)                     | 20 min        | `docker compose up`    |
+| `[ ]` | 07 | **Pratique 2** | [Premiers pas en Cypher (8 requêtes types)](./07-premiers-pas-cypher.md)                   | 30 min        | Run de `run-all.sh`    |
+| `[ ]` | 08 | **Pratique 3** | [Cas pratique Cypher : cours, profs, programme IA](./08-cas-pratique-cypher-ia.md)         | 45 min        | Graphe + 5 requêtes    |
+| `[ ]` | 09 | **Pratique 4** | [Nettoyage et reset d'une base Neo4j (5 méthodes)](./09-nettoyage-neo4j.md)                 | 20 min        | 5 méthodes testées     |
+| `[ ]` | 10 | **Pratique 5** | [Installation Elasticsearch + Kibana](./10-installation-elasticsearch-kibana.md)            | 25 min        | `docker compose up`    |
+| `[ ]` | 11 | **Labo 1**    | [Mise en place complète ELK avec persistance](./11-labo1-mise-en-place-elk.md)              | 2 h           | **Rapport noté**       |
+| `[ ]` | 12 | **Pratique 6** | [Commandes ES via `curl`](./12-commandes-base-elasticsearch.md)                            | 45 min        | Console + tests        |
+| `[ ]` | 13 | **Pratique 7** | [CRUD Kibana Dev Tools — `forum` + `liste_cours`](./13-crud-pedagogique-kibana.md)         | 1 h 30        | Guide étudiant complété ([P1](./assets-cours2/GUIDE-PRATIQUE-1.md)) |
+| `[ ]` | 14 | **Pratique 8** | [Import d'un dataset volumineux (Bulk API, 200 853 docs)](./14-import-bulk-dataset.md)     | 1 h           | `count = 200 853`      |
+| `[ ]` | 15 | **Pratique 9** | [Requêtes Elasticsearch — niveau intermédiaire](./15-requetes-elasticsearch-intermediaire.md) | 1 h         | 16 requêtes DSL        |
+| `[ ]` | 16 | **Pratique 10**| [Requêtes avancées : KQL, ES\|QL, Query DSL](./16-requetes-avancees-kql-esql-dsl.md)        | 45 min        | 3 langages comparés    |
+| `[ ]` | 17 | **Labo 2**    | [Rapport DSL sur l'index `news`](./17-labo2-rapport-dsl-news.md)                            | 3-4 h         | **Rapport noté** ([P2](./assets-cours2/GUIDE-PRATIQUE-2.md)) |
+| `[ ]` | 18 | Annexe        | [Architectures avancées (Kafka, ML, Computer Vision)](./18-annexe-architectures-avancees.md) | 30 min       | Lecture (optionnel)    |
+
+#### Compteur de progression
+
+| Catégorie       | Nombre | Mes cases cochées          |
+| --------------- | :----: | -------------------------- |
+| Théorie         |   3    | `__ / 3`                   |
+| Architecture    |   2    | `__ / 2`                   |
+| Pratiques       |   10   | `__ / 10`                  |
+| Laboratoires    |   2    | `__ / 2` (notés)           |
+| Annexe          |   1    | `__ / 1` (optionnel)       |
+| **Total**       | **18** | **`__ / 18`**              |
+
+> **Astuce** : forkez ce dépôt sur votre compte GitHub, et cochez les cases au fil du semestre. Cela vous fera un journal de progression visible aussi par vos camarades pour les sessions de groupe.
+
+#### Liste à cocher cliquable (alternative GitHub)
+
+> Cette version utilise la syntaxe **GitHub task list** : les cases sont cliquables dans une **issue, un commentaire ou une PR** (mais pas dans un fichier `.md` standard). Copiez-les si vous voulez les utiliser dans une issue de suivi personnel.
+
+<details>
+<summary>Voir la version « task list » à copier dans une issue GitHub</summary>
+
+```markdown
+## Suivi du cours Elasticsearch / ELK / Neo4j
+
+### Théorie et architecture
+- [ ] Chap. 01 — Introduction à Elasticsearch & ELK Stack
+- [ ] Chap. 02 — SQL vs Documents
+- [ ] Chap. 03 — Concepts clés : cluster, shards, mapping
+- [ ] Chap. 04 — Architecture pipeline ELK + Neo4j
+- [ ] Chap. 05 — Architecture pipeline ELK + Machine Learning
+
+### Pratiques Neo4j / Cypher
+- [ ] Pratique 1 (chap. 06) — Installation Neo4j + APOC
+- [ ] Pratique 2 (chap. 07) — Premiers pas Cypher
+- [ ] Pratique 3 (chap. 08) — Cypher cas IA
+- [ ] Pratique 4 (chap. 09) — Nettoyage / reset
+- [ ] Pratique 5 (chap. 10) — Installation ES + Kibana
+
+### Laboratoire 1 (noté)
+- [ ] Labo 1 (chap. 11) — ELK avec persistance
+
+### Pratiques Elasticsearch / Kibana
+- [ ] Pratique 6 (chap. 12) — Commandes ES (curl)
+- [ ] Pratique 7 (chap. 13) — CRUD Kibana — Guide P1
+- [ ] Pratique 8 (chap. 14) — Bulk import 200 853 docs
+- [ ] Pratique 9 (chap. 15) — Requêtes DSL intermédiaires
+- [ ] Pratique 10 (chap. 16) — KQL vs ES|QL vs DSL
+
+### Laboratoire 2 (noté)
+- [ ] Labo 2 (chap. 17) — Rapport DSL News — Guide P2
+
+### Annexe
+- [ ] Chap. 18 — Architectures avancées
+```
+
+</details>
+
+---
+
 ### Récapitulatif des pratiques et laboratoires
 
 | Ordre           | Chapitre | Sujet                                         | Énoncé officiel du prof          | Guide / projet runnable                                              |
@@ -88,12 +173,15 @@ flowchart LR
 
 ## Datasets utilisés
 
-| Dataset                                | Emplacement                                               | Utilisé dans          |
-| -------------------------------------- | --------------------------------------------------------- | --------------------- |
-| Spotify (artists, albums, tracks CSV)  | [`fichiers/`](../fichiers/)                               | Chapitres 06-09 (Neo4j) |
-| News Category Dataset v2 (JSON)        | [`assets-cours2/News_Category_Dataset_v2.json`](./assets-cours2/) | Chapitres 14, 15, 16, 17 |
-| Datasets compressés (CSV/JSON)         | [`assets-cours2/archive*.zip`](./assets-cours2/)         | Variantes du dataset news |
-| Énoncés officiels du prof (.docx)      | [`assets-cours2/Kibana - Pratique *.docx`](./assets-cours2/) | Référence Labo 2       |
+| Dataset                                | Emplacement                                                       | Utilisé dans          |
+| -------------------------------------- | ----------------------------------------------------------------- | --------------------- |
+| Données Cypher de démo (4 personnes, 3 villes) | [`pratique-02-ch07-premiers-pas-cypher/cypher/`](./assets-cours2/solutions/pratique-02-ch07-premiers-pas-cypher/cypher/) | Pratique 2 (chap. 07) |
+| Mini-graphe IA (cours, profs, programme) | [`pratique-03-ch08-cypher-ia/`](./assets-cours2/solutions/pratique-03-ch08-cypher-ia/) | Pratique 3 (chap. 08) |
+| News Category Dataset v2 (JSON, 80 Mo, 200 853 articles) | [`assets-cours2/News_Category_Dataset_v2.json`](./assets-cours2/News_Category_Dataset_v2.json) | Pratiques 8 → 10, Labo 2 |
+| Datasets compressés (CSV/JSON)         | [`assets-cours2/archiveCSV.zip`](./assets-cours2/archiveCSV.zip), [`archiveJSON.zip`](./assets-cours2/archiveJSON.zip) | Variantes du dataset news |
+| Énoncés officiels du prof (.docx)      | [`Kibana - Pratique 1.docx`](./assets-cours2/Kibana%20-%20Pratique%201.docx), [`Kibana - Pratique 2.docx`](./assets-cours2/Kibana%20-%20Pratique%202.docx) | Référence Pratique 7 et Labo 2 |
+
+> **Note** : ce dépôt est la version « cours seul » du projet. Les **datasets Spotify** (CSV `artists/albums/tracks`) du projet recommandation Neo4j sont **volontairement absents** ici — ils sont disponibles dans le dépôt parallèle `elasticsearch-1`.
 
 ---
 

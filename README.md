@@ -33,7 +33,7 @@ flowchart LR
     B --> C{Quelle pratique ?}
     C -->|Pratique 1| D[GUIDE-PRATIQUE-1.md<br/>CRUD Kibana]
     C -->|Pratique 2| E[GUIDE-PRATIQUE-2.md<br/>Search/DSL/Labo 2]
-    D --> F[Projet runnable<br/>pratique-07-ch13-crud-kibana/]
+    D --> F[Projet runnable<br/>ch13-crud-kibana/]
     E --> G[Projets runnables<br/>ch14, ch15, ch16, ch17]
     F --> H[docker compose up -d]
     G --> H
@@ -45,30 +45,34 @@ flowchart LR
 elasticsearch-0/
 ├── README.md                          (ce fichier)
 ├── .gitignore
-├── docs2-cours1/                      Cours complet (chapitres 1 a 17)
-│   ├── README.md                      Index du cours
-│   ├── 01-*.md ... 17-*.md            17 chapitres
-│   └── assets-cours2/
-│       ├── GUIDE-PRATIQUE-1.md        Guide etudiant - Pratique 1
-│       ├── GUIDE-PRATIQUE-2.md        Guide etudiant - Pratique 2
-│       ├── Kibana - Pratique 1.docx   Enonce officiel du prof
-│       ├── Kibana - Pratique 2.docx   Enonce officiel du prof
-│       ├── News_Category_Dataset_v2.json   Dataset (200 853 articles)
-│       └── solutions/
-│           ├── 00-setup-complet-a-z.md
-│           ├── solutions-13...17.md   Solutions detaillees
-│           └── chXX-*/                Projets runnables (compose + scripts)
-│               ├── pratique-03-ch08-cypher-ia/
-│               ├── labo-1-ch11-elk/
-│               ├── pratique-06-ch12-commandes-base/
-│               ├── pratique-07-ch13-crud-kibana/
-│               ├── pratique-08-ch14-bulk-import/
-│               ├── pratique-09-ch15-requetes/
-│               ├── pratique-10-ch16-kql-esql-dsl/
-│               └── labo-2-ch17-labo2/
-└── docs-github/                       Bonus : auth multi-comptes GitHub
-    ├── README.md
-    └── 01-multi-comptes-github-cli.md
+└── docs2-cours1/                      Cours complet (chapitres 1 a 17 + annexe 18)
+    ├── README.md                      Index du cours, table des pratiques, suivi
+    ├── 01-*.md ... 17-*.md            17 chapitres + annexe
+    └── assets-cours2/
+        ├── README.md                  Index des supports
+        ├── GUIDE-PRATIQUE-1.md        Guide etudiant - Pratique 7 (chap. 13)
+        ├── GUIDE-PRATIQUE-2.md        Guide etudiant - Labo 2 (chap. 17)
+        ├── Kibana - Pratique 1.docx   Enonce officiel du prof - Pratique 7
+        ├── Kibana - Pratique 2.docx   Enonce officiel du prof - Labo 2
+        ├── News_Category_Dataset_v2.json   Dataset (200 853 articles)
+        ├── archiveCSV.zip / archiveJSON.zip   Variantes du dataset
+        └── solutions/
+            ├── README.md              Index complet des solutions
+            ├── 00-setup-complet-a-z.md
+            ├── pratique-NN-solutions-*.md / labo-N-solutions-*.md   12 fichiers
+            └── pratique-NN-chXX-*/ et labo-N-chXX-*/   12 projets runnables
+                ├── pratique-01-ch06-installation-neo4j/
+                ├── pratique-02-ch07-premiers-pas-cypher/
+                ├── pratique-03-ch08-cypher-ia/
+                ├── pratique-04-ch09-nettoyage-neo4j/
+                ├── pratique-05-ch10-installation-es-kibana/
+                ├── labo-1-ch11-elk/
+                ├── pratique-06-ch12-commandes-base/
+                ├── pratique-07-ch13-crud-kibana/
+                ├── pratique-08-ch14-bulk-import/
+                ├── pratique-09-ch15-requetes/
+                ├── pratique-10-ch16-kql-esql-dsl/
+                └── labo-2-ch17-labo2/
 ```
 
 ## Pratiques notées
@@ -82,18 +86,13 @@ Chaque guide contient : objectifs, plan visuel, étapes pas-à-pas, livrable + g
 
 ## Pré-requis techniques
 
-| Outil           | Version min. | Vérification                                  |
-| --------------- | :----------: | --------------------------------------------- |
-| Docker Desktop  |     4.20     | `docker info` (≥ 4 GB de RAM allouée)         |
-| Git             |     2.40     | `git --version`                               |
-| (Optionnel) Python | 3.10      | `python --version` (pour `bulk_import.py`)    |
-| (Optionnel) `gh` |     2.40     | `gh --version` (auth GitHub multi-comptes)    |
+| Outil              | Version min. | Vérification                                  |
+| ------------------ | :----------: | --------------------------------------------- |
+| Docker Desktop     |     4.20     | `docker info` (≥ 6 GB de RAM allouée pour ES) |
+| Git                |     2.40     | `git --version`                               |
+| (Optionnel) Python |     3.10     | `python --version` (pour `bulk_import.py`)    |
 
-> **Pas de Docker installé ?** Suivre [`solutions/00-setup-complet-a-z.md`](./docs2-cours1/assets-cours2/solutions/00-setup-complet-a-z.md) — installation **et** premier `docker compose up -d` couverts.
-
-## Annexes
-
-- [Guide GitHub CLI multi-comptes (Windows)](./docs-github/01-multi-comptes-github-cli.md) — utile si vous avez plusieurs comptes GitHub et que `git push` retourne `403` ou `Repository not found`.
+> **Pas de Docker installé ?** Voir l'**Annexe A** du chapitre 06 ([`docs2-cours1/06-installation-neo4j.md`](./docs2-cours1/06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux)) — installation détaillée Windows / macOS / Linux + composition de la stack.
 
 ## Note de version
 

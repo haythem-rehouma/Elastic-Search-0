@@ -2,7 +2,7 @@
 
 # Pratique 4 — Solutions : Nettoyage et reset Neo4j (chap. 09)
 
-> Cible : [chapitre 09](../09-nettoyage-neo4j.md) · Projet runnable : [`pratique-04-ch09-nettoyage-neo4j/`](./pratique-04-ch09-nettoyage-neo4j/)
+> Cible : [chapitre 09](../../09-nettoyage-neo4j.md) · Projet runnable : [`pratique-04-ch09-nettoyage-neo4j/`](./pratique-04-ch09-nettoyage-neo4j/)
 
 ## Objectif
 

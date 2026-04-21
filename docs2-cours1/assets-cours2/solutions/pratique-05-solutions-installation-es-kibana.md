@@ -2,7 +2,7 @@
 
 # Pratique 5 — Solutions : Installation ES + Kibana (chap. 10)
 
-> Cible : [chapitre 10](../10-installation-elasticsearch-kibana.md) · Projet runnable : [`pratique-05-ch10-installation-es-kibana/`](./pratique-05-ch10-installation-es-kibana/)
+> Cible : [chapitre 10](../../10-installation-elasticsearch-kibana.md) · Projet runnable : [`pratique-05-ch10-installation-es-kibana/`](./pratique-05-ch10-installation-es-kibana/)
 
 ## Objectif
 
@@ -53,7 +53,7 @@ bash scripts/verify.sh    # ou .\scripts\verify.ps1
 | API keys                               | Recommandé           | N/A                   |
 | Audit log                              | Recommandé           | N/A                   |
 
-> **Désactiver la sécurité enlève le gros frottement pédagogique** (token Kibana, certificats à recopier au boot). On le réactive au [chapitre 17](../17-labo2-rapport-dsl-news.md) en annexe.
+> **Désactiver la sécurité enlève le gros frottement pédagogique** (token Kibana, certificats à recopier au boot). On le réactive au [chapitre 17](../../17-labo2-rapport-dsl-news.md) en annexe.
 
 ## Pièges classiques
 
@@ -90,6 +90,6 @@ Vous voyez la console divisée en deux : à gauche les requêtes, à droite les 
 ## Pour aller plus loin
 
 - Pratique suivante (livrable Labo 1) : [`labo-1-solutions-elk.md`](./labo-1-solutions-elk.md)
-- Annexe Docker Desktop par OS : [chap. 06 §A](../06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux)
+- Annexe Docker Desktop par OS : [chap. 06 §A](../../06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux)
 
 <p align="right"><a href="#top">Retour en haut</a></p>

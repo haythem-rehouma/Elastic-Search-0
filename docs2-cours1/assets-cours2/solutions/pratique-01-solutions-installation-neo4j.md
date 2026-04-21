@@ -2,7 +2,7 @@
 
 # Pratique 1 — Solutions : Installation de Neo4j (chap. 06)
 
-> Cible : [chapitre 06](../06-installation-neo4j.md) · Projet runnable : [`pratique-01-ch06-installation-neo4j/`](./pratique-01-ch06-installation-neo4j/)
+> Cible : [chapitre 06](../../06-installation-neo4j.md) · Projet runnable : [`pratique-01-ch06-installation-neo4j/`](./pratique-01-ch06-installation-neo4j/)
 
 ## Objectif
 
@@ -54,7 +54,7 @@ bash scripts/verify.sh    # ou .\scripts\verify.ps1
 
 ## Pour aller plus loin
 
-- [Annexe A du chapitre 06](../06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux) : installation détaillée de Docker Desktop par OS
+- [Annexe A du chapitre 06](../../06-installation-neo4j.md#annexe-a--installation-de-docker-desktop-windows--macos--linux) : installation détaillée de Docker Desktop par OS
 - Pratique suivante : [`pratique-02-solutions-premiers-pas-cypher.md`](./pratique-02-solutions-premiers-pas-cypher.md)
 
 <p align="right"><a href="#top">Retour en haut</a></p>

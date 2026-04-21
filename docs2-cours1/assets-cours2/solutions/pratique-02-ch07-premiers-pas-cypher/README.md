@@ -70,6 +70,6 @@ docker compose down -v
 
 ## Prochaine étape
 
-Pratique 3 — [`pratique-03-pratique-03-ch08-cypher-ia/`](../pratique-03-pratique-03-ch08-cypher-ia/)
+Pratique 3 — [`pratique-03-ch08-cypher-ia/`](../pratique-03-ch08-cypher-ia/)
 
 <p align="right"><a href="#top">Retour en haut</a></p>
